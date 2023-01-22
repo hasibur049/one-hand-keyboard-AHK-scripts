@@ -1,0 +1,27 @@
+~space & e::
+Send {backspace}
+Send {Enter}
+return
+
+~space & h::
+Send {backspace}
+Send {backspace}
+return
+
+space & y::
+SetKeyDelay, -1
+Send {backspace}
+SetKeyDelay, -1
+Send p
+return
+
+
+
+
+~e & h::
+Send {backspace}
+SetKeyDelay, -1
+Send {Enter}
+return
+
+f9 & w::  send {backspace}																																																																																																  																																																																																																																																													
