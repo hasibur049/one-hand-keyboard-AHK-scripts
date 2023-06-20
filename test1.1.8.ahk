@@ -1,4 +1,4 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -15,6 +15,7 @@ SetCapsLockState, AlwaysOff
 CoordMode, Tooltip, Screen ;relative to the active window by default
 
 ; ^Ctrl +Shift #Win !Alt
+
 
 ;*#c::Run Calc.exe --- Win+C, Shift+Win+C, Ctrl+Win+C, etc. will all trigger this hotkey.
 ;*ScrollLock::Run Notepad --- Pressing ScrollLock will trigger this hotkey even when modifier key(s) are down.
@@ -357,6 +358,7 @@ SC053::LCtrl ;NumpadDot:Scancode has higher presidence
 *SC051::Send, {blind}{Control Down}{Shift Down} ;Numpad3
 *SC051 Up::Send, {blind}{Control Up}{Shift Up}
 SC04D::Alt ;Numpad6
+[::#^c ;shortcut key to toggle invert color filter
 
 /*
 NumpadDot::
@@ -486,6 +488,16 @@ else if GetKeyState("Alt", "D")
 else
     Send {Right}
 return
+
+Space & u::AltTabMenu ;Middle mouse button activates Alt+Tab / Program switcher
+Space & u::AltTab ;Send Alt+Tab to shift to right
+Space & y::ShiftAltTab ;Send Shift+Alt+Tab to shift to left
+;~LButton::AltTabMenuDismiss ;Fire when the Left button is pressed (Don't wait for it to be released)
+
+#IfWinActive, ahk_class Chrome_WidgetWin_1
+Space & b::Send ^{PgUp}
+Space & q::Send ^{PgDn}
+#If
 
 /*
 ;Space & x::Send {left}
