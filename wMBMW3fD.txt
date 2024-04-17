@@ -1,0 +1,27 @@
+LAYER 4---------------------------------------------
+    __      COPY    PASTE    CUT   SAVE     UNDO
+    F1        F2       F3     F4     F5       F6
+    __      LEFT       UP   DOWN   RGHT      DEL
+   SFT      HOME     PGUP   PGDN    END     PSCR
+    F7        F8       F9     __    F10       __
+
+LAYER 3---------------------------------------------
+    LPRN    RPRN     EQL    SLSH   ASTR     MINS
+    LBRC    RBRC       1       2      3     PLUS
+    LCBR    RCBR       4       5      6      ENT
+      __    COMM       7       8      9     UNDS
+      __      __    COLN       0    DOT      SFT
+
+LAYER 2---------------------------------------------
+     ESC    BSLS    MINS       X       Z     GRV
+    SCLN       Y       B     ENT       G       T
+    LCTL       U       O      __       R       C
+       S       M       Y       J       D       J
+     GUI      __     ALT      __      __       L
+
+LAYER 1---------------------------------------------
+       Q    SLSH     SFT     ENT     DOT    QUOT
+     TAB       E       H       T       I       P
+    COMM       S       E      ^2       A       W
+      ^3       N       I       V       F       K
+     GUI    CAPS     ALT      ^4    BSPC     SPC
