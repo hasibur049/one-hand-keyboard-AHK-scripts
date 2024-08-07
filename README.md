@@ -10,7 +10,7 @@ Layer 1
 
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
-|       |    S   |    E   |   L1   [[   A  ]]    W   |
+|       |    S   |    E   | **L1** [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |   D    |    K   |
 |       |        |        |                          |
 ```
