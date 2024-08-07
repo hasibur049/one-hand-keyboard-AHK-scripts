@@ -25,6 +25,8 @@ Press Index(keyboard f key) to toggle between layer 1 and 2.
 ```
 **Layer 3**
 ```
+press Numpad (Tab key) to start layer 3. tap numpad to end!
+
 |       |        |        |    BS  |        |        |
 |Numpad |        |   7    |    8   |    9   |        |
 |       |        |   4    |    5   [[   6  ]]    0   |
@@ -33,6 +35,9 @@ Press Index(keyboard f key) to toggle between layer 1 and 2.
 ```
 **Layer 4**
 ```
+press symbol (Capslock key) to start layer 4. tap symbol
+to end!
+
 |       |        |    ~   |    |   |    ^   |        |
 |       |    `   |   /\   |   -_   |   =+   |   &$   |
 |Symbol |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
@@ -82,7 +87,8 @@ tap Alt key to start visual 2. press Alt/Space to end.
 ```
 **Quarty Keyboard Layout**
 ```
-Only left part of the layout. where 'F' is typing home/guide key.
+Only left part of the layout. where 'F' is typing home/
+guide key.
 
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
