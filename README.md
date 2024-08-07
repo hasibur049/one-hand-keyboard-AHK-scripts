@@ -1,9 +1,8 @@
 # one-hand-keyboard-AHK-scripts
 
 This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
-
-### Index Layer
 ---------------
+### Index Layer
 1. Start/End Layer 1/2
 - Press `Index` (`F` key on the keyboard)
 2. Switch Layers
@@ -25,9 +24,8 @@ Layer 2
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
 ```
-
-### Number & Symbol Layer
 -------------------------
+### Number & Symbol Layer
 1. Start/End Layer 3
 - Press `Numpad` (`Tab` key on the keyboard)
 2. Switch Layers
@@ -55,9 +53,8 @@ Layer 4
 . for short tap
 , for long tap 
 ```
-
-### Space with N key
 --------------------
+### Space with N key
 - Press any key While `Space Down` and `index` deactive (layer 1)
 ```
 
@@ -76,9 +73,8 @@ Layer 4
 |       |   7    |    4   |   3    |   2    |    8   |
 |       |        |        |                          |
 ```
-
-### Visual Layer
 ----------------
+### Visual Layer
 1. Start/End Visual 1
 - Long press `Space` (200ms). Short press to end
 2. Switch Layers
@@ -106,9 +102,8 @@ Visual 2
 |       |        |        |        |        |        |
 |       |        |        |                          |
 ```
-
-### Quarty Keyboard Layout
 --------------------------
+### Quarty Keyboard Layout
 - Left part of the Quarty Keyboard Layout. where 'F' is typing home/<br> guide key.
 ```
 
