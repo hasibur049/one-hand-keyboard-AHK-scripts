@@ -54,17 +54,18 @@ Layer 3
 , for long tap 
 ```
 ### Space with N key
+- Press any key While `Space Down` and `index` deactive (layer 1)
+  
 ```
-Space with N key while index off (layer 1)
-
 |       |        |    9   |    8   |    7   |        |
 |       |        |   /\   |   -_   |   =+   |   &$   |
 |       |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |                          |
-
-Space with N key while index on (layer 2)
-
+```
+- Press any key While `Space Down` and `index` active (layer 2)
+ 
+```
 |       |        |    9   |   8    |   7    |        |
 |       |        |    5   |   1    |   0    |    9   |
 |       |   6    |  Left  |  Down  [[  Up  ]]  Right |
@@ -78,7 +79,6 @@ Space with N key while index on (layer 2)
 - While the `Visual 1` is active, press the `symbol`/`numpad`/<br>`visual 2` to switch layers.
 ```
 Visual 1
-Long tap Space to start visual 1. short tap to end!
 
 |       |        |        |        |        |        |
 |       |        |        |        |        |        |
@@ -94,8 +94,6 @@ Long tap Space to start visual 1. short tap to end!
 ```
 Visual 2
 
-tap Alt key to start visual 2. press Alt/Space to end.
-
 |       |        |        |        |        |        |
 |       |        |        |        |        |        |
 |       |        |        |        [[      ]]        |
@@ -103,10 +101,9 @@ tap Alt key to start visual 2. press Alt/Space to end.
 |       |        |        |                          |
 ```
 ### Quarty Keyboard Layout
-```
-Only left part of the layout. where 'F' is typing home/
+- Left part of the layout. where 'F' is typing home/
 guide key.
-
+```
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
 | Caps  |    A   |    S   |    D   [[   F  ]]    G   |
