@@ -25,9 +25,9 @@ Press Index(keyboard f key) to toggle between layer 1 and 2.
 ```
 **Layer 3**
 1. Start/End Layer 3
-- Press Numpad (`Tab` key on the keyboard)
+- Press `Numpad` (`Tab` key on the keyboard)
 2. Switch Layers
-- While the Numpad is active, press the symbol/visual key 1?2 to switch layers.
+- While the `Numpad` is active, press the `symbol`/`visual` 1?2 to switch layers.
 
 ```
 |       |        |        |    BS  |        |        |
