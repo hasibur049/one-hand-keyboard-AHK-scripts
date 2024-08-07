@@ -8,33 +8,36 @@ This is my personal keyboard layout. It is designed for use with only the left h
 ```
 Layer 1
 
-|      |       |  TAB  |  ENT  |   X   |       |
-|      |   Q   |   H   |   T   |   I   |   P   |
-|      |   S   |   E   |   ^   [   A   ]   W   |
-|      |   N   |   L   |  BS   |   D   |   K   |
+|       |        |   TAB  |   ENT  |   X    |        |
+|       |    Q   |    H   |    T   |   I    |    P   |
+|       |    S   |    E   |   L1   [[   A  ]]    W   |
+|       |    N   |    L   |   BS   |   D    |    K   |
+|       |        |        |                          |
 ```
 ```
 Layer 2
 
-|      |       |       |  BS   |       |       |
-|      |   Z   |   B   |  ENT  |   G   |   J   |
-|      |   U   |   O   |   ^   [   R   ]   C   |
-|      |   M   |   Y   |   V   |   F   |   P   |
+|       |        |        |   BS   |        |        |
+|       |    Z   |    B   |   ENT  |    G   |    J   |
+|       |    U   |    O   |        [[   R  ]]    C   |
+|       |    M   |    Y   |    V   |    F   |    P   |
+|       |        |        |                          |
 ```
 ```
 Numpad 3
 
-|      |      |       |   BS  |       |       |
-|      |      |   7   |   8   |   9   |       |
-|      |      |   4   |   5   [   6   ]   0   |
-|      |      |   1   |   2   |   3   |       |
+|       |        |        |    BS  |        |        |
+|   L3  |        |   7    |    8   |    9   |        |
+|       |        |   4    |    5   [    6   ]    0   |
+|       |        |   1    |    2   |    3   |        |
+|       |        |        |                          |
 ```
 ```
 Symbol 4
 
 |       |        |    ~   |    |   |    ^   |        |
 |       |    `   |   /\   |   -_   |   =+   |   &$   |
-|Layer 4|   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
+|   L4  |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |                          |
 
