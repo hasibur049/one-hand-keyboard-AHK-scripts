@@ -7,9 +7,8 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 Layer 1
 
-
-|       |        |   TAB  |   ENT  |   X    |        |
 |-------|--------|--------|--------|--------|--------|
+|       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
 |       |    S   |    E   | **L4** [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |   D    |    K   |
