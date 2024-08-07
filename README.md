@@ -76,12 +76,13 @@ Space with N key while index on (layer 2)
 ```
 **Quarty Keyboard Layout**
 ```
+Only left part of the layout. where 'F' is typing home/guide key.
+
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
 | Caps  |    A   |    S   |    D   [[   F  ]]    G   |
 | Shift |    Z   |    X   |    C   |    V   |    B   |
 | Ctrl  |   Win  |   Alt  |         Spacebar         |
-
 
 Effort layer
 
