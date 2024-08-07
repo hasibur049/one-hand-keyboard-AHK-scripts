@@ -7,7 +7,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 **Layer 1**
 ```
-Press Index to toggle between layer 1 and 2. 
+Press Index(keyboard f key) to toggle between layer 1 and 2. 
 
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
