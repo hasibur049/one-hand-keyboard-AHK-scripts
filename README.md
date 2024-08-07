@@ -11,6 +11,12 @@ This is my personal keyboard layout. It is designed for use with only the **left
 
 - **Customizable**
 - **Supports multiple layouts**
+|       |        |   TAB  |   ENT  |   X    |        |
+|-------|--------|--------|--------|--------|--------|
+|       |    Q   |    H   |    T   |   I    |    P   |
+|       |    S   |    E   | **L4** |   A    |    W   |
+|       |    N   |    L   |   BS   |   D    |    K   |
+|       |        |        |        |        |        |
 
 ## Layout diagram with diffrent layer 
 ```
