@@ -28,8 +28,7 @@ Layer 2
 1. Start/End Layer 3
 - Press `Numpad` (`Tab` key on the keyboard)
 2. Switch Layers
-- While the `Numpad` is active, press the `symbol`/`visual 1?2`
-  to switch layers.
+- While the `Numpad` is active, press the `symbol`/`visual 1?2`<br> to switch layers.
 ```
 Layer 3
 
@@ -101,8 +100,7 @@ Visual 2
 |       |        |        |                          |
 ```
 ### Quarty Keyboard Layout
-- Left part of the Quarty Keyboard Layout. where 'F' is typing home/
-guide key.
+- Left part of the Quarty Keyboard Layout. where 'F' is typing home/<br> guide key.
 ```
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
