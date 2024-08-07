@@ -25,10 +25,10 @@ Press Index(keyboard f key) to toggle between layer 1 and 2.
 ```
 **Layer 3**
 1. Start Layer 3
-- Press the `Tab` key on the Numpad.
+- Press Numpad (`Tab` key on the keyboard)
 
 2. End Layer 3
-- Tap any key on the Numpad.
+- Press Numpad (`Tab` key on the keyboard)
 
 4. Switch Layers
 - While the Numpad is active, press the symbol/visual key labeled `1?2` to switch layers.
