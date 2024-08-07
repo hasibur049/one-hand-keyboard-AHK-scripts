@@ -2,7 +2,7 @@
 
 This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
 
-### Index Layer 
+### **Index Layer** 
 
 1. Start/End Layer 1/2
 - Press `Index` (`F` key on the keyboard)
