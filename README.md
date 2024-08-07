@@ -23,6 +23,7 @@ More information about your project.
 
 Layer 1
 ```
+|-------|--------|--------|--------|--------|--------|
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
 |       |    S   |    E   | **L4** [[   A  ]]    W   |
