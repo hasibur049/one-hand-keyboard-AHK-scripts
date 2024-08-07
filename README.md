@@ -63,6 +63,15 @@ Effort layer
 |   5  |   1   |  0.5  |  0.5  [  0.5  ]   3   |
 |   7  |  2.5  |  1.5  |  1.5  |  1.5  |  0.5  |
 ```
+```
+Quarty Keyboard Layout
+
+| Esc   |   !1  |   @2  |   #3  |   $4  |   %5  |
+| Tab   |   Q   |   W   |   E   |   R   |   T   |
+| Caps  |   A   |   S   |   D   [   F   ]   G   |
+| Shift |   Z   |   X   |   C   |   V   |   B   |
+| Ctrl  |  Win  |  Alt  |        Spacebar       |
+```
 
 
 
