@@ -25,7 +25,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 ```
 |       |        |        |    BS  |        |        |
 |Numpad |        |   7    |    8   |    9   |        |
-|       |        |   4    |    5   [    6   ]    0   |
+|       |        |   4    |    5   [[   6  ]]    0   |
 |       |        |   1    |    2   |    3   |        |
 |       |        |        |                          |
 ```
@@ -62,7 +62,7 @@ Space with N key while index on (layer 2)
 ```
 |       |        |        |        |        |        |
 |       |        |        |        |        |        |
-|       |        |        |        [        ]        |
+|       |        |        |        [[      ]]        |
 |       |        |        |        |        |        |
 |       |        |        |                          |
 ```
@@ -70,7 +70,7 @@ Space with N key while index on (layer 2)
 ```
 |       |        |        |        |        |        |
 |       |        |        |        |        |        |
-|       |        |        |        [        ]        |
+|       |        |        |        [[      ]]        |
 |       |        |        |        |        |        |
 |       |        |        |                          |
 ```
