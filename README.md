@@ -3,6 +3,7 @@
 This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
 
 ### Index Layer 
+
 1. Start/End Layer 1/2
 - Press `Index` (`F` key on the keyboard)
 2. Switch Layers
@@ -24,6 +25,7 @@ Layer 2
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
 ```
+
 ### Number & Symbol Layer
 1. Start/End Layer 3
 - Press `Numpad` (`Tab` key on the keyboard)
@@ -52,10 +54,11 @@ Layer 4
 . for short tap
 , for long tap 
 ```
+
 ### Space with N key
 - Press any key While `Space Down` and `index` deactive (layer 1)
-  
 ```
+
 |       |        |    9   |    8   |    7   |        |
 |       |        |   /\   |   -_   |   =+   |   &$   |
 |       |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
@@ -63,14 +66,15 @@ Layer 4
 |       |        |        |                          |
 ```
 - Press any key While `Space Down` and `index` active (layer 2)
- 
 ```
+
 |       |        |    9   |   8    |   7    |        |
 |       |        |    5   |   1    |   0    |    9   |
 |       |   6    |  Left  |  Down  [[  Up  ]]  Right |
 |       |   7    |    4   |   3    |   2    |    8   |
 |       |        |        |                          |
 ```
+
 ### Visual Layer
 1. Start/End Visual 1
 - Long press `Space` (200ms). Short press to end
@@ -99,9 +103,11 @@ Visual 2
 |       |        |        |        |        |        |
 |       |        |        |                          |
 ```
+
 ### Quarty Keyboard Layout
 - Left part of the Quarty Keyboard Layout. where 'F' is typing home/<br> guide key.
 ```
+
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
 | Caps  |    A   |    S   |    D   [[   F  ]]    G   |
@@ -115,5 +121,4 @@ Effort layer
 |   5   |    1   |   0.5  |   0.5  [[  0.5 ]]    3   |
 |   7   |   2.5  |   1.5  |   1.5  |   1.5  |    8   |
 |   15  |   13   |    6   |    3   |    1   |   0.5  |
-
 ```
