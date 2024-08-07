@@ -3,8 +3,6 @@
 
 This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
 
-[Click here to see the full view of README](https://github.com/hasiburDevv/one-hand-keyboard-AHK-scripts/blob/main/README.md)
-
 ## Layout diagram with diffrent layer 
 
 **Layer 1**
