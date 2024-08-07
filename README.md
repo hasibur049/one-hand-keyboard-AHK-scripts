@@ -42,7 +42,7 @@ Layer 3
 1. Start/End Layer 4
 - Press `Symbol` (`Capslock` key on the keyboard)
 ```
-Layer 3
+Layer 4
 
 |       |        |    ~   |    |   |    ^   |        |
 |       |    `   |   /\   |   -_   |   =+   |   &$   |
