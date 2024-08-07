@@ -101,7 +101,7 @@ Visual 2
 |       |        |        |                          |
 ```
 ### Quarty Keyboard Layout
-- Left part of the layout. where 'F' is typing home/
+- Left part of the Quarty Keyboard Layout. where 'F' is typing home/
 guide key.
 ```
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
