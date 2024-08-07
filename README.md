@@ -11,10 +11,10 @@ This is my personal keyboard layout. It is designed for use with only the left h
 ```
 layer 1
 
-|       |        |   TAB  |   ENT  |   X    |        |
-|       |    Q   |    H   |    T   |   I    |    P   |
+|       |        |   TAB  |   ENT  |    X   |        |
+|       |    Q   |    H   |    T   |    I   |    P   |
 |       |    S   |    E   |  Index [[   A  ]]    W   |
-|       |    N   |    L   |   BS   |   D    |    K   |
+|       |    N   |    L   |   BS   |    D   |    K   |
 |       |        |        |                          |
 
 Layer 2
