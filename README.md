@@ -56,14 +56,6 @@ Space with N key while index on (layer 2)
 |     |   7   |   4   |   3   |   2   |   8   |
 ```
 ```
-Effort layer
-
-|  10  |   8   |  2.5  |  2.5  |  2.5  |   7   |
-|   6  |  3.5  |   1   |   1   |   1   |   4   |
-|   5  |   1   |  0.5  |  0.5  [  0.5  ]   3   |
-|   7  |  2.5  |  1.5  |  1.5  |  1.5  |  0.5  |
-```
-```
 Quarty Keyboard Layout
 
 | Esc   |   !1  |   @2  |   #3  |   $4  |   %5  |
@@ -71,7 +63,12 @@ Quarty Keyboard Layout
 | Caps  |   A   |   S   |   D   [   F   ]   G   |
 | Shift |   Z   |   X   |   C   |   V   |   B   |
 | Ctrl  |  Win  |  Alt  |        Spacebar       |
+
+Effort layer
+
+|  10  |   8   |  2.5  |  2.5  |  2.5  |   7   |
+|   6  |  3.5  |   1   |   1   |   1   |   4   |
+|   5  |   1   |  0.5  |  0.5  [  0.5  ]   3   |
+|   7  |  2.5  |  1.5  |  1.5  |  1.5  |  0.5  |
+
 ```
-
-
-
