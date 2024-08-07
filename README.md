@@ -72,7 +72,10 @@ Space with N key while index on (layer 2)
 |       |        |        |                          |
 ```
 ### Visual Layer
-
+1. Start/End Visual 1
+- Long press `Space` (200ms). Short press to end
+2. Switch Layers
+- While the `Visual 1` is active, press the `symbol`/`numpad`/<br>`visual 2` to switch layers.
 ```
 Visual 1
 Long tap Space to start visual 1. short tap to end!
@@ -82,7 +85,13 @@ Long tap Space to start visual 1. short tap to end!
 |       |        |        |        [[      ]]        |
 |       |        |        |        |        |        |
 |       |        |        |                          |
-
+```
+1. Start/End Visual 2
+- Press `Alt` to start.
+- Press `Alt`/`Space` to end.
+2. Switch Layers
+- While the ` Visual 2` is active, press the `symbol`/`numpad`/<br>`visual 1` to switch layers.
+```
 Visual 2
 
 tap Alt key to start visual 2. press Alt/Space to end.
