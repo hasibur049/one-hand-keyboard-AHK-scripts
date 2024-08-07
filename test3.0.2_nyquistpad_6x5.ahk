@@ -52,7 +52,8 @@ global NUMPAD_NUMBER_MODE := false
 global IS_RBUTTON_DOWN := false ; Initialize flags to track the state of RButton down
 
 index_TooltipX := 960 ; tooltip 1 index layer
-visual_TooltipX := index_TooltipX - 117 ; tooltip 2 visual layer
+visual_TooltipX_Space := index_TooltipX - 117 ; tooltip 2 visual layer
+visual_TooltipX_Alt := index_TooltipX - 117 ; tooltip 9 visual layer
 ; A_CaretX-50, A_CaretY-50 ; tooltip 3 for display chord dict
 number_TooltipX := index_TooltipX + 100 ; tooltip 4 number layer
 symbol_TooltipX := index_TooltipX + 100 ; tooltip 5 symbol layer
@@ -94,20 +95,24 @@ $d Up::
 return
 
 ; Hotkeys for d & other N key combinations
-~d & s::Send {Left}
-~d & g::Send {Up}
-~d & f::Send {Right}
-~d & v::Send {Down}
-~d & t::AltTab ;Send Alt+Tab to shift to right
+~d & s::return
+~d & f::return
+~d & g::AltTab ;Send Alt+Tab to shift to right
+~d & v::return
+~d & t::return
 
-	#If INSERT_MODE_II ;;start of INSERT_MODE_II
+	#If INSERT_MODE_II ; start of INSERT_MODE_II
 	;fn row
 	;*Esc::
 	*1::capslock
-	*2::send {Tab}
-	*3::SendInput, % (GetKeyState("Shift", "P") ? "X" : indexMode("x"))
-	*4::SendInput, % (GetKeyState("Shift", "P") ? "J" : indexMode("j"))
-	*5::send {Tab}
+	*2::SendInput, % (GetKeyState("Shift", "P") ? "J" : indexMode("j"))
+	*3::
+		SetKeyDelay -1
+		Send {Backspace}
+		Gosub, BackspaceLabel
+	return
+	*4::SendInput, % (GetKeyState("Shift", "P") ? "X" : indexMode("x"))
+	*5::return
 
 	;top row
 	*q::SendInput, % (GetKeyState("Shift", "P") ? "Z" : indexMode("z"))
@@ -134,16 +139,34 @@ return
 	*v::SendInput, % (GetKeyState("Shift", "P") ? "F" : indexMode("f"))
 	*b::SendInput, % (GetKeyState("Shift", "P") ? "P" : indexMode("p"))
 
-	~Space & s::Send, {Left}
-	~Space & d::Send, {Up}
+	;fn row
+	~Space & 1::return
+	~Space & 2::Send 9
+	~Space & 3::Send 8
+	~Space & 4::Send 7
+	~Space & 5::return
+	;top row
+	~Space & w::Send, 5
+	~Space & e::Send, 1
+	~Space & r::Send, 0
+	~Space & t::Send, 9
+	;home row
+    ~Space & a::Send, 6
+	~Space & s::Send {Left} ; h - move cursor left
+	~Space & d::Send {Down} ; j - move cursor down
 	~Space & d Up::
 		INSERT_MODE_II := true
-		TOGGLE := true
 
         ToolTip, Index, % index_TooltipX, 0, 1
 	return
-	~Space & f::Send, {Down}
-	~Space & g::Send, {Right}
+	~Space & f::Send {Up} ; k - move cursor up
+	~Space & g::Send {Right} ; l - move cursor right
+	;bottom row
+	~Space & z::Send, 7
+	~Space & x::Send, 4
+	~Space & c::Send, 3
+	~Space & v::Send, 2
+	~Space & b::Send, 8
 
 	#If ;end of INSERT_MODE_II
 	return
@@ -151,31 +174,17 @@ return
 ;fn row
 ;3 0e1 2, 546, 987
 
-*1::Send, 3
-*2::
-    KeyWait, 2, T0.16
-    send % (ErrorLevel ? 5 : 0)
-    KeyWait, 2
-return
+*1::return
+*2::send {Tab}
 
 *3::
-    KeyWait, 3, T0.20
-	if (ErrorLevel) {
-		Send, 4
-    } else {
-		send, {Enter}
-        SearchString := ""
-        ToolTip,, A_CaretX-50, A_CaretY-50, 3, 2000
-	}
-    KeyWait, 3
+	send, {Enter}
+	SearchString := ""
+	ToolTip,, A_CaretX-50, A_CaretY-50, 3, 2000
 return
 
-*4::
-    KeyWait, 4, T0.16
-    send % (ErrorLevel ? 6 : 1)
-    KeyWait, 4
-return
-*5::Send 2
+*4::SendInput, % (GetKeyState("Shift", "P") ? "X" : indexMode("x"))
+*5::return
 
 ;top row
 *q::indexMode("q")
@@ -229,15 +238,15 @@ LCtrl & Alt::Reload	; Hotkey to reload the script
 LCtrl & Space::Suspend ; Hotkey to suspend the script
 
 Alt::
-	gosub, VisualLabelAlt
+	 gosub, VisualLabelAlt
 return
 
 Tab::
-	gosub, NumberLebel
+	gosub, NumberLebelTab
 return
 
 CapsLock::
-	gosub, SymbolLebel
+	gosub, SymbolLebelCapsLock
 return
 
 Space::
@@ -283,23 +292,11 @@ return
 ~Space & a::tapMode("a","!","%") ; two key hotkey short/long
 ~Space & s::tapMode("s","`'","""") ; two key hotkey short/long
 
-
-~Space & d::
-	INSERT_MODE := false
+~Space & d::tapMode("d",";",":") ; two key hotkey short/long
+~Space & d Up::
 	INSERT_MODE_II := false
 
-	tapMode("d",";",":") ; two key hotkey short/long
-
-	if TOGGLE {
-		INSERT_MODE_II := true
-
-		ToolTip, Index, % index_TooltipX, 0, 1
-		INSERT_MODE := true
-
-	} else {
-		INSERT_MODE := true
-	}
-	return
+	ToolTip,,,, 1
 return
 
 ~Space & f::tapMode("f",".",",") ; two key hotkey short/long
@@ -310,6 +307,7 @@ return
 ~Space & c::tapMode("c","(",")") ; two key hotkey
 ~Space & v::tapMode("v","{","}") ; two key hotkey
 ~Space & b::tapMode("b","`#","@") ; two key hotkey short/long
+
 /*
    --------------------------------------------------
    --------------------------------------------------
@@ -328,8 +326,7 @@ if !VISUAL_SPACE_MODE {
 
 	ToolTip,,,,4
 	ToolTip,,,,5
-	ToolTip,,,,6
-	ToolTip,Visual 1, % visual_TooltipX, 0, 2
+	ToolTip,Visual 1, % visual_TooltipX_Space, 0, 2
 	}
 Return
 
@@ -341,31 +338,11 @@ Return
 	$4::Reload ; Hotkey to reload the script
 	$5::Suspend ; Hotkey to suspend the script
 
-	$s::Send {Left} ;h - move cursor left
-	$d::Send {Down} ;j - move cursor down
-	$f::Send {Up} ;k - move cursor up
-	$g::Send {Right} ;l - move cursor right
+	$d::Send {WheelUp}
+	$f::Send {WheelDown}
 
-	RShift & s::Send +{Left}
-	RShift & d::Send +{Down}
-	RShift & f::Send +{Up}
-	RShift & g::Send +{Right}
-
-	Down & s::Send +^{Left}
-	Down & d::Send +^{Down}
-	Down & f::Send +^{Up}
-	Down & g::Send +^{Right}
-
-	Right & s::Send ^{Left}
-	Right & d::Send ^{Down}
-	Right & f::Send ^{Up}
-	Right & g::Send ^{Right}
-
-	$c::Send {WheelUp}
-	$v::Send {WheelDown}
-
-	RShift & c::Send {WheelUp 5} ;scrollspeed:=5
-	RShift & v::Send {WheelDown 5} ;scrollspeed:=5
+	RShift & d::Send {WheelUp 5} ;scrollspeed:=5
+	RShift & f::Send {WheelDown 5} ;scrollspeed:=5
 
 	$Space::
 	VISUAL_SPACE_MODE := false
@@ -396,16 +373,18 @@ Return
    ----------------------------------------------
 */
 
-NumberLebel:
+NumberLebelTab:
 if !NUMBER_MODE {
 	NUMBER_MODE := true
 	SYMBOL_MODE := false
 	VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
 	INSERT_MODE := false
-	INSERT_MODE_II := false
+	;INSERT_MODE_II := false
 
 	ToolTip,,,,2
 	ToolTip,,,,5
+	ToolTip,,,,9
 	ToolTip, Numpad, % number_TooltipX, 0, 4
 }
 Return
@@ -443,6 +422,7 @@ Return
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
 	VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
 	INSERT_MODE := true
 
 	if TOGGLE {
@@ -450,10 +430,12 @@ Return
 
 		ToolTip,,,,4
 		ToolTip,,,,5
+		ToolTip,,,,9
 		ToolTip, Index, % index_TooltipX, 0, 1
 	} else {
 		ToolTip,,,,4
 		ToolTip,,,,5
+		ToolTip,,,,9
 	}
 	return
 #If
@@ -467,16 +449,18 @@ return
    ----------------------------------------------
 */
 
-SymbolLebel:
+SymbolLebelCapsLock:
 if !SYMBOL_MODE {
 	SYMBOL_MODE := true
 	NUMBER_MODE := false
 	VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
 	INSERT_MODE := false
-	INSERT_MODE_II := false
+	;INSERT_MODE_II := false
 
 	ToolTip,,,,2
 	ToolTip,,,,4
+	ToolTip,,,,9
 	ToolTip, Symbol, % symbol_TooltipX, 0, 5
 	}
 Return
@@ -514,6 +498,7 @@ Return
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
 	VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
 	INSERT_MODE := true
 
 	if (TOGGLE) {
@@ -522,16 +507,17 @@ Return
 		ToolTip,,,,2
 		ToolTip,,,,4
 		ToolTip,,,,5
+		ToolTip,,,,9
 		ToolTip, Index, % index_TooltipX, 0, 1
 	} else {
 		ToolTip,,,,2
 		ToolTip,,,,4
 		ToolTip,,,,5
+		ToolTip,,,,9
 	}
 	return
 #If
 return
-
 
 /*
    ----------------------------------------------
@@ -570,6 +556,7 @@ Down::
 	; Activate the numpad symbol layer
 	NUMPAD_SYMBOL_MODE := true
 	VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
 	INSERT_MODE := false
@@ -582,6 +569,7 @@ Down::
 	ToolTip,,,,2
 	ToolTip,,,,4
 	ToolTip,,,,5
+	ToolTip,,,,9
 return
 
 Down Up::
@@ -595,6 +583,7 @@ Down Up::
     SYMBOL_MODE := false
     NUMBER_MODE := false
     VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
     INSERT_MODE := true
 
     if TOGGLE {
@@ -605,6 +594,7 @@ Down Up::
         ToolTip,,,,4
         ToolTip,,,,5
         ToolTip,,,,6
+		ToolTip,,,,9
 
         ; Show the index layer tooltip
         ToolTip, Index, % index_TooltipX, 0, 1
@@ -614,6 +604,7 @@ Down Up::
         ToolTip,,,,4
         ToolTip,,,,5
         ToolTip,,,,6
+		ToolTip,,,,9
     }
 return
 
@@ -649,52 +640,6 @@ return
 #If
 return
 
-; ---------------------------------------------------------------------------------------------------
-/*
-; ------- works ----------
-*Down::
-last := layer, layer := 3
-	INSERT_MODE := false
-	ToolTip,Layer3 Active , 1400, 2, 6
-KeyWait Down
-
-;layer := A_Priorkey != "Down" ? last : last = 2 ? 1 : 2
-
-
-if (A_PriorKey != "Down") {
-    layer := last
-} else {
-    if (last = 2) {
-        layer := 1
-    } else {
-        layer := 2
-    }
-}
-
-
-if (layer = 2) {
-	ToolTip,Layer2 Active , 1400, 2, 6
-} else {
-	INSERT_MODE := true
-	ToolTip,%layer%, 1400, 2, 6
-	;ToolTip,,,,6
-}
-return
-
-#If (layer = 2)
-$s::send 0
-$d::send 0
-$g::Send {WheelDown}
-$f::Send {WheelUp}
-
-#If (layer = 3)
-$s::send 1
-$d::Send, {blind}{1}
-$f::send 1
-#If
-return
-*/
-
 /*
    ----------------------------------------------
    -----------Number layer section---------------
@@ -708,6 +653,7 @@ Right::
 	; Activate the numpad number layer
 	NUMPAD_NUMBER_MODE := true
 	VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
 	INSERT_MODE := false
@@ -718,6 +664,7 @@ Right::
 
 	; Hide any other tooltips
 	ToolTip,,,,2
+	ToolTip,,,,9
 	ToolTip,,,,4
 	ToolTip,,,,5
 return
@@ -733,6 +680,7 @@ Right Up::
     SYMBOL_MODE := false
     NUMBER_MODE := false
     VISUAL_SPACE_MODE := false
+	VISUAL_ALT_MODE := false
     INSERT_MODE := true
 
     if TOGGLE {
@@ -743,6 +691,7 @@ Right Up::
         ToolTip,,,,4
         ToolTip,,,,5
         ToolTip,,,,7
+		ToolTip,,,,9
 
         ; Show the index layer tooltip
         ToolTip, Index, % index_TooltipX, 0, 1
@@ -752,6 +701,7 @@ Right Up::
         ToolTip,,,,4
         ToolTip,,,,5
         ToolTip,,,,7
+		ToolTip,,,,9
     }
 return
 
@@ -760,7 +710,11 @@ return
 	;fn/num row
 	$1::return
 	$2::return
-	$3::return
+	$3::
+		SetKeyDelay -1
+		Send {Backspace}
+		Gosub, BackspaceLabel
+	return
 	$4::return
 	$5::return
 
@@ -795,8 +749,62 @@ return
 */
 
 VisualLabelAlt:
+if !VISUAL_ALT_MODE {
+	VISUAL_ALT_MODE := true
+	VISUAL_SPACE_MODE := false
+	NUMBER_MODE := false
+	SYMBOL_MODE := false
+	INSERT_MODE := false
+	INSERT_MODE_II := false
 
+	ToolTip,,,,2
+	ToolTip,,,,4
+	ToolTip,,,,5
+	ToolTip,Visual 2, % visual_TooltipX_Alt, 0, 9
+}
+Return
+
+#If VISUAL_ALT_MODE
+	;home row
+	$s::Send {Left} ;h - move cursor left
+	$d::Send {Down} ;j - move cursor down
+	$f::Send {Up} ;k - move cursor up
+	$g::Send {Right} ;l - move cursor right
+
+$Alt::
+Space::
+	VISUAL_ALT_MODE := false
+	VISUAL_SPACE_MODE := false
+	NUMBER_MODE := false
+	SYMBOL_MODE := false
+	INSERT_MODE := true
+
+	if TOGGLE {
+		INSERT_MODE_II := true
+
+		ToolTip,,,,2
+		ToolTip,,,,4
+		ToolTip,,,,5
+		ToolTip,,,,9
+		ToolTip, Index, % index_TooltipX, 0, 1
+	} else {
+		ToolTip,,,,2
+		ToolTip,,,,4
+		ToolTip,,,,5
+		ToolTip,,,,9
+	}
+
+	if LongPress(200) {
+		Gosub, VisualLabelSpace
+	} else {
+		gosub, SpacebarLabel
+	}
 return
+
+#If
+return
+
+
 /*
    -----------------------------------------------
    ---------------Productivity mouse--------------
@@ -822,8 +830,8 @@ RButton::
 		Send ^v  ; double short click to paste from clipboard
     Else If (g = "000")
 		Send ^a ; triple short click to select all
-	Else
-		Send {RButton} ; usually single short click to send rbutton
+	Else If (g = "0")
+		Send {RButton} ; single short click to send rbutton
 
 Return
 
