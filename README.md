@@ -60,6 +60,8 @@ Space with N key while index on (layer 2)
 ```
 **Visual 1**
 ```
+Long tap Space to start visual 1. short tap to end!
+
 |       |        |        |        |        |        |
 |       |        |        |        |        |        |
 |       |        |        |        [[      ]]        |
@@ -68,6 +70,8 @@ Space with N key while index on (layer 2)
 ```
 **Visual 2**
 ```
+tap Alt key to start visual 2. press Alt/Space to end.
+
 |       |        |        |        |        |        |
 |       |        |        |        |        |        |
 |       |        |        |        [[      ]]        |
