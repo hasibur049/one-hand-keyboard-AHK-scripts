@@ -2,8 +2,8 @@
 
 This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
 
-### <u>Index Layer</u>
-
+### Index Layer
+---------------
 1. Start/End Layer 1/2
 - Press `Index` (`F` key on the keyboard)
 2. Switch Layers
@@ -27,6 +27,7 @@ Layer 2
 ```
 
 ### Number & Symbol Layer
+-------------------------
 1. Start/End Layer 3
 - Press `Numpad` (`Tab` key on the keyboard)
 2. Switch Layers
@@ -56,6 +57,7 @@ Layer 4
 ```
 
 ### Space with N key
+--------------------
 - Press any key While `Space Down` and `index` deactive (layer 1)
 ```
 
@@ -76,6 +78,7 @@ Layer 4
 ```
 
 ### Visual Layer
+----------------
 1. Start/End Visual 1
 - Long press `Space` (200ms). Short press to end
 2. Switch Layers
@@ -105,6 +108,7 @@ Visual 2
 ```
 
 ### Quarty Keyboard Layout
+--------------------------
 - Left part of the Quarty Keyboard Layout. where 'F' is typing home/<br> guide key.
 ```
 
