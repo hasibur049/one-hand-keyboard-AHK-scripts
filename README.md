@@ -5,8 +5,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 ## Layout diagram with diffrent layer 
 
-Layer 1
-
+**Layer 1**
 ```
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
@@ -14,27 +13,24 @@ Layer 1
 |       |    N   |    L   |   BS   |   D    |    K   |
 |       |        |        |                          |
 ```
+**Layer 2**
 ```
-Layer 2
-
 |       |        |        |   BS   |        |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
 |       |    U   |    O   |        [[   R  ]]    C   |
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
 ```
+**Layer 3**
 ```
-Layer 3
-
 |       |        |        |    BS  |        |        |
 |Numpad |        |   7    |    8   |    9   |        |
 |       |        |   4    |    5   [    6   ]    0   |
 |       |        |   1    |    2   |    3   |        |
 |       |        |        |                          |
 ```
+**Layer 4**
 ```
-Layer 4
-
 |       |        |    ~   |    |   |    ^   |        |
 |       |    `   |   /\   |   -_   |   =+   |   &$   |
 |Symbol |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
@@ -44,6 +40,7 @@ Layer 4
 . for short tap
 , for long tap 
 ```
+**Space with N key**
 ```
 Space with N key while index off (layer 1)
 
@@ -61,9 +58,8 @@ Space with N key while index on (layer 2)
 |       |   7    |    4   |   3    |   2    |    8   |
 |       |        |        |                          |
 ```
+**Quarty Keyboard Layout**
 ```
-Quarty Keyboard Layout
-
 | Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
 | Caps  |    A   |    S   |    D   [[   F  ]]    G   |
