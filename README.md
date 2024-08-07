@@ -28,7 +28,7 @@ Layer 2
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
 ```
-**Number & Symbol Layer**
+### Number & Symbol Layer
 1. Start/End Layer 3
 - Press `Numpad` (`Tab` key on the keyboard)
 2. Switch Layers
