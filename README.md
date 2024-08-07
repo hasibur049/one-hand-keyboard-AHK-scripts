@@ -7,21 +7,10 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 This is my personal keyboard layout. It is designed for use with only the **left** hand. People who have use of only their left hand can benefit from using this software.
 
-## Features
-
-- **Customizable**
-- **Supports multiple layouts**
-|       |        |   TAB  |   ENT  |   X    |        |
-|-------|--------|--------|--------|--------|--------|
-|       |    Q   |    H   |    T   |   I    |    P   |
-|       |    S   |    E   | **L4** |   A    |    W   |
-|       |    N   |    L   |   BS   |   D    |    K   |
-|       |        |        |        |        |        |
-
 ## Layout diagram with diffrent layer 
-```
-Layer 1
 
+Layer 1
+```
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
 |       |    S   |    E   | **L4** [[   A  ]]    W   |
