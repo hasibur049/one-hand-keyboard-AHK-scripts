@@ -68,7 +68,7 @@ Quarty Keyboard Layout
 | Tab   |    Q   |    W   |    E   |    R   |    T   |
 | Caps  |    A   |    S   |    D   [[   F  ]]    G   |
 | Shift |    Z   |    X   |    C   |    V   |    B   |
-| Ctrl  |   Win  |   Alt  |        Spacebar          |
+| Ctrl  |   Win  |   Alt  |         Spacebar         |
 
 
 Effort layer
