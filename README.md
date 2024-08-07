@@ -54,7 +54,7 @@ Layer 3
 . for short tap
 , for long tap 
 ```
-**Space with N key**
+### Space with N key
 ```
 Space with N key while index off (layer 1)
 
