@@ -12,7 +12,7 @@ Layer 1
 |       |    Q   |    H   |    T   |   I    |    P   |
 |       |    S   |    E   |  *L1*  [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |   D    |    K   |
-|       |        |        |                          |
+|       |        |        |        __left__          |
 ```
 ```
 Layer 2
