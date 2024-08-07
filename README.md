@@ -3,7 +3,7 @@
 
 This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
 
-## Layout diagram with diffrent layer 
+# Layout diagram with diffrent layer 
 
 **Index Layer** 
 1. Start/End Layer 1/2
