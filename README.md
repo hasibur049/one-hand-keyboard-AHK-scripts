@@ -41,6 +41,21 @@ Symbol 4
 , for long tap 
 ```
 ```
+Space with N key while index off (layer 1)
+
+|     |        |    9   |    8   |    7   |        |
+|     |        |  /  \  |  -  _  |  =  +  |  &  $  |
+|     |  !  %  |  '  "  |  ;  :  [  .  ,  ]  *  ?  |
+|     |  <  >  |  [  ]  |  (  )  |  {  }  |  #  @  |
+
+Space with N key while index on (layer 2)
+
+|     |       |   9   |   8   |   7   |       |
+|     |       |   5   |   1   |   0   |   9   |
+|     |   6   |  Left | Down  [   Up  ] Right |
+|     |   7   |   4   |   3   |   2   |   8   |
+```
+```
 Effort layer
 
 |  10  |   8   |  2.5  |  2.5  |  2.5  |   7   |
