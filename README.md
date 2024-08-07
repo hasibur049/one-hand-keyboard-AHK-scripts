@@ -5,7 +5,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 ## Layout diagram with diffrent layer 
 
-#### Index Layer 
+### Index Layer 
 1. Start/End Layer 1/2
 - Press `Index` (`F` key on the keyboard)
 2. Switch Layers
