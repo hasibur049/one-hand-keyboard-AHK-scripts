@@ -51,7 +51,7 @@ Space with N key while index off (layer 1)
 |       |        |   /\   |   -_   |   =+   |   &$   |
 |       |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
-|       |        |        |        |        |        |
+|       |        |        |                          |
 
 Space with N key while index on (layer 2)
 
@@ -59,7 +59,7 @@ Space with N key while index on (layer 2)
 |       |        |    5   |   1    |   0    |    9   |
 |       |   6    |  Left  |  Down  [[  Up  ]]  Right |
 |       |   7    |    4   |   3    |   2    |    8   |
-|       |        |        |        |        |        |
+|       |        |        |                          |
 ```
 ```
 Quarty Keyboard Layout
