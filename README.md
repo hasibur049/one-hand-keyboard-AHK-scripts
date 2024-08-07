@@ -5,41 +5,48 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 ## Layout diagram with diffrent layer 
 
-**Layer 1**
+**Index Layer** 
+1. Start/End Layer 1/2
+- Press `Index` (`F` key on the keyboard)
+2. Switch Layers
+- While the `Index` is active/deactive, press the `symbol`/
+  `numpad`/`visual 1?2` to switch layers.
 ```
-Press Index(keyboard f key) to toggle between layer 1 and 2. 
+layer 1
 
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
 |       |    S   |    E   |  Index [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |   D    |    K   |
 |       |        |        |                          |
-```
-**Layer 2**
-```
+
+Layer 2
+
 |       |        |        |   BS   |        |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
 |       |    U   |    O   |        [[   R  ]]    C   |
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
 ```
-**Layer 3**
+**Number & Symbol Layer**
 1. Start/End Layer 3
 - Press `Numpad` (`Tab` key on the keyboard)
 2. Switch Layers
-- While the `Numpad` is active, press the `symbol`/`visual` 1?2 to switch layers.
-
+- While the `Numpad` is active, press the `symbol`/`visual 1?2`
+  to switch layers.
 ```
+Layer 3
+
 |       |        |        |    BS  |        |        |
 |Numpad |        |   7    |    8   |    9   |        |
 |       |        |   4    |    5   [[   6  ]]    0   |
 |       |        |   1    |    2   |    3   |        |
 |       |        |        |                          |
 ```
-**Layer 4**
+1. Start/End Layer 4
+- Press `Symbol` (`Capslock` key on the keyboard)
 ```
-press symbol (Capslock key) to start layer 4. tap symbol
-to end!
+Layer 3
 
 |       |        |    ~   |    |   |    ^   |        |
 |       |    `   |   /\   |   -_   |   =+   |   &$   |
