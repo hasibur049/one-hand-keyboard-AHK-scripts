@@ -8,7 +8,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 This is my personal keyboard layout. It is designed for use with only the **left** hand. People who have use of only their left hand can benefit from using this software.
 
 ## Features
-- **L4**
+ **L4**
 - **Customizable**
 - **Supports multiple layouts**
 
