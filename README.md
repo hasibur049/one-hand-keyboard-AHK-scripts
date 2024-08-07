@@ -8,7 +8,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 This is my personal keyboard layout. It is designed for use with only the **left** hand. People who have use of only their left hand can benefit from using this software.
 
 ## Features
- **L4**
+
 - **Customizable**
 - **Supports multiple layouts**
 
@@ -18,9 +18,9 @@ Layer 1
 
 |       |        |   TAB  |   ENT  |   X    |        |
 |       |    Q   |    H   |    T   |   I    |    P   |
-|       |    S   |    E   |  *L1*  [[   A  ]]    W   |
+|       |    S   |    E   | **L4** [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |   D    |    K   |
-|       |        | **left**       |        __left__          |
+|       |        |        |                          |
 ```
 ```
 Layer 2
