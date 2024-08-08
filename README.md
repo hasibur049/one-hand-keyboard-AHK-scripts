@@ -7,7 +7,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 1. Start/End Index Layer:
 - Press `F` key to start/end.
 2. Switch Layers:
-- While the `Index` is active/deactive, press the `symbol`/`numpad`/<br>`visual 1?2` to switch layers.
+- While the `Index` is on/off, press the `symbol`/`numpad`/`visual 1?2`<br> to switch layers.
 ```
 Index Layer On
 
