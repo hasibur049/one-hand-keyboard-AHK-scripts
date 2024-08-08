@@ -30,7 +30,7 @@ Index Layer Off
 1. Start/End Number Layer:
 - Press `Tab` key to start/end.
 2. Switch Layers:
-- While the `Numpad` is active, press the `symbol`/`visual 1?2`<br> to switch layers.
+- While the `Numpad` is on, press the `symbol`/`visual 1?2`to switch layers.
 ```
 Number/Numpad Layer 
 
@@ -80,7 +80,7 @@ long tap (160ms) to send :
 - Long press `Space` (200ms) key to start.
 - Short press `Space` key to end.
 2. Switch Layers:
-- While the `Visual 1` is active, press the `symbol`/`numpad`/<br>`visual 2` to switch layers.
+- While the `Visual 1` is on, press the `symbol`/`numpad`/`visual 2`<br> to switch layers.
 ```
 Visual 1
 
@@ -94,7 +94,7 @@ Visual 1
 - Press `Alt` to start.
 - Press `Alt`/`Space` to end.
 2. Switch Layers:
-- While the ` Visual 2` is active, press the `symbol`/`numpad`/<br>`visual 1` to switch layers.
+- While the ` Visual 2` is on, press the `symbol`/`numpad`/`visual 1`<br> to switch layers.
 ```
 Visual 2
 
