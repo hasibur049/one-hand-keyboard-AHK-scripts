@@ -63,7 +63,7 @@ Layer 4
 |       |        |   /\   |   -_   |   =+   |   &$   |
 |       |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
-|       |        |        |                          |
+|       |        |        |           Space          |
 ```
 - Press any key While `Space Down` and `index` active (layer 2)
 ```
@@ -72,7 +72,7 @@ Layer 4
 |       |        |    5   |   1    |   0    |    9   |
 |       |   6    |  Left  |  Down  [[  Up  ]]  Right |
 |       |   7    |    4   |   3    |   2    |    8   |
-|       |        |        |                          |
+|       |        |        |           Space          |
 ```
 ----------------
 ### Visual Layer
