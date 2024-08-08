@@ -4,12 +4,12 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 ---------------
 ### Index Layer
-1. Start/End Index Layer 
+1. Start/End Index Layer:
 - Press `F` key to start/end.
-2. Switch Layers
+2. Switch Layers:
 - While the `Index` is active/deactive, press the `symbol`/`numpad`/<br>`visual 1?2` to switch layers.
 ```
-index layer on
+Index Layer On
 
 |       |        |   TAB  |   ENT  |    X   |        |
 |       |    Q   |    H   |    T   |    I   |    P   |
@@ -17,7 +17,7 @@ index layer on
 |       |    N   |    L   |   BS   |    D   |    K   |
 |       |        |        |                          |
 
-index layer off
+Index Layer Off
 
 |       |        |        |   BS   |        |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
@@ -27,9 +27,9 @@ index layer off
 ```
 -------------------------
 ### Number & Symbol Layer
-1. Start/End Number Layer 
+1. Start/End Number Layer:
 - Press `Tab` key to start/end.
-2. Switch Layers
+2. Switch Layers:
 - While the `Numpad` is active, press the `symbol`/`visual 1?2`<br> to switch layers.
 ```
 Number/Numpad Layer 
@@ -40,7 +40,7 @@ Number/Numpad Layer
 |       |        |   1    |    2   |    3   |        |
 |       |        |        |                          |
 ```
-1. Start/End Symbol Layer 4
+1. Start/End Symbol Layer:
 - Press `Capslock` key to start/end.
 ```
 Symbol Layer
@@ -76,10 +76,10 @@ long tap (160ms) to send :
 ```
 ----------------
 ### Visual Layer
-1. Start/End Visual 1
+1. Start/End Visual 1:
 - Long press `Space` (200ms) key to start.
 - Short press `Space` key to end.
-2. Switch Layers
+2. Switch Layers:
 - While the `Visual 1` is active, press the `symbol`/`numpad`/<br>`visual 2` to switch layers.
 ```
 Visual 1
@@ -90,10 +90,10 @@ Visual 1
 |       |        |        |        |        |        |
 |       |        |        |                          |
 ```
-1. Start/End Visual 2
+1. Start/End Visual 2:
 - Press `Alt` to start.
 - Press `Alt`/`Space` to end.
-2. Switch Layers
+2. Switch Layers:
 - While the ` Visual 2` is active, press the `symbol`/`numpad`/<br>`visual 1` to switch layers.
 ```
 Visual 2
