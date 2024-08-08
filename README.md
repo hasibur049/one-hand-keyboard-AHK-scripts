@@ -5,7 +5,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 ---------------
 ### Index Layer
 1. Start/End Layer 1/2
-- Press `Index` (`F` key on the keyboard)
+- Press `F` key to start/end.
 2. Switch Layers
 - While the `Index` is active/deactive, press the `symbol`/`numpad`/<br>`visual 1?2` to switch layers.
 ```
@@ -27,8 +27,8 @@ Layer 2
 ```
 -------------------------
 ### Number & Symbol Layer
-1. Start/End Layer 3
-- Press `Numpad` (`Tab` key on the keyboard)
+1. Start/End Number Layer 3
+- Press `Tab` key to start/end.
 2. Switch Layers
 - While the `Numpad` is active, press the `symbol`/`visual 1?2`<br> to switch layers.
 ```
@@ -40,8 +40,8 @@ Layer 3
 |       |        |   1    |    2   |    3   |        |
 |       |        |        |                          |
 ```
-1. Start/End Layer 4
-- Press `Symbol` (`Capslock` key on the keyboard)
+1. Start/End Symbol Layer 4
+- Press `Capslock` key to start/end.
 ```
 Layer 4
 
@@ -51,12 +51,12 @@ Layer 4
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |                          |
 
-. for short tap
-, for long tap 
+; for short tap
+: for long tap 
 ```
 --------------------
 ### Space with N key
-- Press any key While `Space Down` and `index` deactive (layer 1)
+- Press any key While `Space` key Down and `index` deactive (layer 1)
 ```
 
 |       |        |    9   |    8   |    7   |        |
@@ -65,7 +65,7 @@ Layer 4
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |           Space          |
 ```
-- Press any key While `Space Down` and `index` active (layer 2)
+- Press any key While `Space` key Down and `index` active (layer 2)
 ```
 
 |       |        |    9   |   8    |   7    |        |
@@ -77,7 +77,8 @@ Layer 4
 ----------------
 ### Visual Layer
 1. Start/End Visual 1
-- Long press `Space` (200ms). Short press to end
+- Long press `Space` (200ms) key to start.
+- Short press `Space` key to end.
 2. Switch Layers
 - While the `Visual 1` is active, press the `symbol`/`numpad`/<br>`visual 2` to switch layers.
 ```
