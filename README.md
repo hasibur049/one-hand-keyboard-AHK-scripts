@@ -4,9 +4,9 @@ This is my personal keyboard layout. It is designed for use with only the left h
 
 ---------------
 ### Index Layer
-1. Start/End Index Layer:
+I. Start/End Index Layer:
 - Press `F` key to start/end.
-2. Switch Layers:
+II. Switch Layers:
 - While the `Index` is on/off, press the `symbol`/`numpad`/`visual 1?2`<br> to switch layers.
 ```
 Index Layer On
