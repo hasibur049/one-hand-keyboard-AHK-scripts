@@ -30,7 +30,7 @@ Index Layer Off
 1. Start/End Number Layer:
 - Press `Tab` key to start/end.
 2. Switch Layers:
-- While the `Numpad` is on, press the `symbol`/`visual 1?2`to switch layers.
+- While the `Numpad` is on, press the `symbol`/`visual 1?2` to switch layers.
 ```
 Number/Numpad Layer 
 
