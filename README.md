@@ -51,8 +51,8 @@ Layer 4
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |                          |
 
-press short tap to send ;
-press long tap (160ms) to send :
+short tap to send ;
+long tap (160ms) to send :
 ```
 --------------------
 ### Space with N key
