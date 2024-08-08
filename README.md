@@ -52,7 +52,7 @@ Layer 4
 |       |        |        |                          |
 
 ; for short tap
-: for long tap 
+: for long tap (160ms) 
 ```
 --------------------
 ### Space with N key
