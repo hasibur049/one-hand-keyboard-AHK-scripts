@@ -56,7 +56,7 @@ Layer 4
 ```
 --------------------
 ### Space with N key
-- Press any key While `Space` key Down and `index` deactive (layer 1)
+- Press any key While `Space` key down and `index` deactive (layer 1)
 ```
 
 |       |        |    9   |    8   |    7   |        |
@@ -65,7 +65,7 @@ Layer 4
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |           Space          |
 ```
-- Press any key While `Space` key Down and `index` active (layer 2)
+- Press any key While `Space` key down and `index` active (layer 2)
 ```
 
 |       |        |    9   |   8    |   7    |        |
