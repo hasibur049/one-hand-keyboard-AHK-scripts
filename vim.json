@@ -24,30 +24,6 @@
     }
   },
   {
-    "key": "t",
-    "command": "vim.remap",
-    "when": "editorTextFocus && vim.mode == 'Visual'",
-    "args": {
-      "after": ["<Right>"]
-    }
-  },
-  {
-    "key": "l",
-    "command": "vim.remap",
-    "when": "editorTextFocus && vim.mode == 'Visual'",
-    "args": {
-      "after": ["<Down>"]
-    }
-  },
-  {
-    "key": "backspace",
-    "command": "vim.remap",
-    "when": "editorTextFocus && vim.mode == 'Visual'",
-    "args": {
-      "after": ["<Up>"]
-    }
-  },
-  {
     "key": "e",
     "command": "vim.remap",
     "when": "editorTextFocus && vim.mode == 'Normal'",
@@ -93,6 +69,70 @@
     "when": "editorTextFocus && vim.mode == 'Normal'",
     "args": {
       "after": ["v"]
+    }
+  },
+  {
+    "key": "t",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["<Right>"]
+    }
+  },
+  {
+    "key": "l",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["<Down>"]
+    }
+  },
+  {
+    "key": "backspace",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["<Up>"]
+    }
+  },
+  {
+    "key": "n",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["0"]
+    }
+  },
+  {
+    "key": "k",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["$"]
+    }
+  },
+  {
+    "key": "e",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["b"]
+    }
+  },
+  {
+    "key": "i",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["c"]
+    }
+  },
+  {
+    "key": "a",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["y"]
     }
   }
 ]
