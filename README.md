@@ -123,3 +123,45 @@ Effort layer
 |   7   |   2.5  |   1.5  |   1.5  |   1.5  |    8   |
 |   15  |   13   |    6   |    3   |    1   |   0.5  |
 ```
+--------------------------
+### vim VS Code 
+```
+Normal Mode (Index Layer On)
+
+| Esc   |      |      |      |      |      |
+| Tab   |   >>   |   h   |   l   |       |       |
+|       | visual |       |       [[     ]]       |
+| Shift |    ^   |   j   |   k   |       |       |
+| Ctrl  |   Win  |   Alt  |         Spacebar         |
+
+Normal Mode (Index Layer Off)
+
+|  10   |    8   |   2.5  |   2.5  |   2.5  |    7   |
+|   6   |   3.5  |    1   |    1   |    1   |    4   |
+|   5   |    1   |   0.5  |   0.5  [[  0.5 ]]    3   |
+|   7   |   2.5  |   1.5  |   1.5  |   1.5  |    8   |
+|   15  |   13   |    6   |    3   |    1   |   0.5  |
+
+// ^ to {n} jump to the first non-blank character of the line
+// $ to {k} jump to the end of the line
+// b to {e} jump backwards to the start of a word
+// cw or ce to {rc} change (replace) to the end of the word.
+// Ctrl + r to {b} redo.
+// >> – to {q} indent (move right) line one shiftwidth
+
+// w - jump forwards to the start of a word
+// 0 - jump to the start of the line
+
+// gg - go to the first line of the document
+// r – replace a single character.
+// J – join line below to the current one with one space in between.
+// cc – change (replace) entire line and enter insert mode.
+// s – delete character and substitute text.
+// u – undo.
+// . – repeat last command.
+// yy – yank (copy) a line
+// p – put (paste) the clipboard after cursor
+// dd – delete (cut) a line
+// x – delete (cut) character
+// << – de-indent (move left) line one shiftwidth
+```
