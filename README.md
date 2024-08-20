@@ -9,7 +9,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 2. Switch Layers:
 - While the `Index` is on/off, press the `symbol`/`numpad`/`visual 1?2`<br> to switch layers.
 ```
-Index Layer On
+Index Layer off
 
 |       |        |   TAB  |   ENT  |    X   |        |
 |       |    Q   |    H   |    T   |    I   |    P   |
@@ -17,7 +17,7 @@ Index Layer On
 |       |    N   |    L   |   BS   |    D   |    K   |
 |       |        |        |                          |
 
-Index Layer Off
+Index Layer on
 
 |       |        |        |   BS   |        |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
@@ -105,28 +105,10 @@ Visual 2
 |       |        |        |                          |
 ```
 --------------------------
-### Quarty Keyboard Layout
-- Left part of the Quarty Keyboard Layout. where 'F' is typing home/<br> guide key.
-```
-
-| Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
-| Tab   |    Q   |    W   |    E   |    R   |    T   |
-| Caps  |    A   |    S   |    D   [[   F  ]]    G   |
-| Shift |    Z   |    X   |    C   |    V   |    B   |
-| Ctrl  |   Win  |   Alt  |         Spacebar         |
-
-Effort layer
-
-|  10   |    8   |   2.5  |   2.5  |   2.5  |    7   |
-|   6   |   3.5  |    1   |    1   |    1   |    4   |
-|   5   |    1   |   0.5  |   0.5  [[  0.5 ]]    3   |
-|   7   |   2.5  |   1.5  |   1.5  |   1.5  |    8   |
-|   15  |   13   |    6   |    3   |    1   |   0.5  |
-```
---------------------------
 ### vim VS Code 
+Normal Mode
 ```
-Normal Mode (Index Layer On)
+Normal Mode (Index Layer off)
 
 |       |        |   TAB  |   ENT  |    X   |        |
 |       |    Q   |    H   |    T   |    I   |    P   |
@@ -156,7 +138,7 @@ d{motion}: "Delete" command. Deletes the text defined by the motion.
 k: jump to the end of the line. {$}
 ```
 ```
-Normal Mode (Index Layer Off)
+Normal Mode (Index Layer on)
 
 |       |        |        |   BS   |        |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
@@ -174,4 +156,74 @@ cc – change (replace) entire line and enter insert mode.
 p – put (paste) the clipboard after cursor
 x – delete (cut) character
 z – de-indent (move left) line one shiftwidth. {<<}
+```
+
+Visual mode
+
+```
+Visual Mode (character-wise selection) (Index Layer off)
+
+|       |        |   TAB  |   ENT  |    X   |        |
+|       |    Q   |    H   |    T   |    I   |    P   |
+|       |    S   |    E   |  Index [[   A  ]]    W   |
+|       |    N   |    L   |   BS   |    D   |    K   |
+|       |        |        |                          |
+
+q: 
+h: Move left.
+t: Move right.
+i: Change the selected text (delete and enter Insert mode). {c}
+p: Paste text after the selected area.
+
+s: Exir Visual mode and Enter insert mode.
+e: Move backward to the beginning of the current word. {b}
+a: Yank (copy) the selected text. {y}
+w: Move forward to the start of the next word.
+
+n: Move to the beginning of the line. {0}
+l: Move down.
+BS: Move up.
+d: Delete the selected text (works like cut).
+k: Move to the end of the line. {$}
+u: Undo the last action
+```
+```
+Visual Line Mode (V)
+
+V: Starts Visual Line mode, selecting entire lines.
+d: Delete the selected lines.
+y: Yank (copy) the selected lines.
+c: Change the selected lines (delete and enter Insert mode).
+>: Indent the selected lines.
+<: Unindent the selected lines.
+=: Auto-indent the selected lines.
+
+Visual Block Mode (Ctrl+v)
+
+Ctrl+v: Start Visual Block mode.
+I: Insert text before the block (type text and press Esc to apply to all lines in the block).
+A: Append text after the block (type text and press Esc to apply to all lines in the block).
+d: Delete the selected block.
+y: Yank the selected block.
+p: Paste the block after the selection.
+r: Replace selected characters with a single character.
+```
+--------------------------
+### Quarty Keyboard Layout
+- Left part of the Quarty Keyboard Layout. where 'F' is typing home/<br> guide key.
+```
+
+| Esc   |    !1  |    @2  |    #3  |    $4  |    %5  |
+| Tab   |    Q   |    W   |    E   |    R   |    T   |
+| Caps  |    A   |    S   |    D   [[   F  ]]    G   |
+| Shift |    Z   |    X   |    C   |    V   |    B   |
+| Ctrl  |   Win  |   Alt  |         Spacebar         |
+
+Effort layer
+
+|  10   |    8   |   2.5  |   2.5  |   2.5  |    7   |
+|   6   |   3.5  |    1   |    1   |    1   |    4   |
+|   5   |    1   |   0.5  |   0.5  [[  0.5 ]]    3   |
+|   7   |   2.5  |   1.5  |   1.5  |   1.5  |    8   |
+|   15  |   13   |    6   |    3   |    1   |   0.5  |
 ```
