@@ -128,40 +128,50 @@ Effort layer
 ```
 Normal Mode (Index Layer On)
 
-| Esc   |      |      |      |      |      |
-| Tab   |   >>   |   h   |   l   |       |       |
-|       | visual |       |       [[     ]]       |
-| Shift |    ^   |   j   |   k   |       |       |
-| Ctrl  |   Win  |   Alt  |         Spacebar         |
+|       |        |   TAB  |   ENT  |    X   |        |
+|       |    Q   |    H   |    T   |    I   |    P   |
+|       |    S   |    E   |  Index [[   A  ]]    W   |
+|       |    N   |    L   |   BS   |    D   |    K   |
+|       |        |        |                          |
 
+q: indent (move right) line one shiftwidth.(>>)
+h: Move left.
+t: Move right.
+i: Enter Insert mode before the cursor.
+p: Paste after the cursor.
+
+s: Enter Visual mode to select characters.
+e: jump backwards to the start of a word. {b}
+a: Enter Insert mode after the cursor.
+w: jump forwards to the start of a word.
+
+n: jump to the first non-blank character of the line. {^}
+l: Move down.
+BS: Move up.
+d{motion}: "Delete" command. Deletes the text defined by the motion.
+    Examples:
+    dw: Delete from the cursor position to the end of the word.
+    diw: Delete the entire word under the cursor.
+    dd: Delete the entire current line.
+k: jump to the end of the line. {$}
+```
+```
 Normal Mode (Index Layer Off)
 
-|  10   |    8   |   2.5  |   2.5  |   2.5  |    7   |
-|   6   |   3.5  |    1   |    1   |    1   |    4   |
-|   5   |    1   |   0.5  |   0.5  [[  0.5 ]]    3   |
-|   7   |   2.5  |   1.5  |   1.5  |   1.5  |    8   |
-|   15  |   13   |    6   |    3   |    1   |   0.5  |
+|       |        |        |   BS   |        |        |
+|       |    Z   |    B   |   ENT  |    G   |    J   |
+|       |    U   |    O   |        [[   R  ]]    C   |
+|       |    M   |    Y   |    V   |    F   |    P   |
+|       |        |        |                          |
 
-// ^ to {n} jump to the first non-blank character of the line
-// $ to {k} jump to the end of the line
-// b to {e} jump backwards to the start of a word
-// cw or ce to {rc} change (replace) to the end of the word.
-// Ctrl + r to {b} redo.
-// >> – to {q} indent (move right) line one shiftwidth
-
-// w - jump forwards to the start of a word
-// 0 - jump to the start of the line
-
-// gg - go to the first line of the document
-// r – replace a single character.
-// J – join line below to the current one with one space in between.
-// cc – change (replace) entire line and enter insert mode.
-// s – delete character and substitute text.
-// u – undo.
-// . – repeat last command.
-// yy – yank (copy) a line
-// p – put (paste) the clipboard after cursor
-// dd – delete (cut) a line
-// x – delete (cut) character
-// << – de-indent (move left) line one shiftwidth
+b - redo. { Ctrl + r}
+u – undo.
+yy – yank (copy) a line
+gg - go to the first line of the document
+r – replace a single character.
+cc – change (replace) entire line and enter insert mode.
+. – repeat last command.
+p – put (paste) the clipboard after cursor
+x – delete (cut) character
+z – de-indent (move left) line one shiftwidth. {<<}
 ```
