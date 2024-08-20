@@ -1,0 +1,123 @@
+[
+  {
+    "key": "t",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["<Right>"]
+    }
+  },
+  {
+    "key": "l",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["<Down>"]
+    }
+  },
+  {
+    "key": "backspace",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["<Up>"]
+    }
+  },
+  {
+    "key": "t",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["<Right>"]
+    }
+  },
+  {
+    "key": "l",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["<Down>"]
+    }
+  },
+  {
+    "key": "backspace",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Visual'",
+    "args": {
+      "after": ["<Up>"]
+    }
+  },
+  {
+    "key": "e",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["b"]
+    }
+  },
+  {
+    "key": "q",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": [">",">"]
+    }
+  },
+  {
+    "key": "n",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["^"]
+    }
+  },
+  {
+    "key": "k",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["$"]
+    }
+  },
+  {
+    "key": "b",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["<C-r>"]
+    }
+  },
+  {
+    "key": "s",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["v"]
+    }
+  }
+]
+
+// noraml mode
+
+// ^ to {n} jump to the first non-blank character of the line
+// $ to {k} jump to the end of the line
+// b to {e} jump backwards to the start of a word
+// cw or ce to {rc} change (replace) to the end of the word.
+// Ctrl + r to {b} redo.
+// >> – to {q} indent (move right) line one shiftwidth
+
+// w - jump forwards to the start of a word
+// 0 - jump to the start of the line
+
+// gg - go to the first line of the document
+// r – replace a single character.
+// J – join line below to the current one with one space in between.
+// cc – change (replace) entire line and enter insert mode.
+// s – delete character and substitute text.
+// u – undo.
+// . – repeat last command.
+// yy – yank (copy) a line
+// p – put (paste) the clipboard after cursor
+// dd – delete (cut) a line
+// x – delete (cut) character
+// << – de-indent (move left) line one shiftwidth
