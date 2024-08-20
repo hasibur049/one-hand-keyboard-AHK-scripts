@@ -156,6 +156,16 @@ cc – change (replace) entire line and enter insert mode.
 p – put (paste) the clipboard after cursor
 x – delete (cut) character
 z – de-indent (move left) line one shiftwidth. {<<}
+
+1. Yank (y)
+Purpose: Copy text.
+Examples: yy, yw, yiw, y$
+2. Delete (d)
+Purpose: Delete (cut) text.
+Examples: dd, dw, diw, d$
+3. Change (c)
+Purpose: Delete text and enter Insert mode.
+Examples: cc, cw, ciw, c$
 ```
 
 Visual mode
