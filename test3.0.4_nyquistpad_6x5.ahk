@@ -313,8 +313,19 @@ Return
 	;fn row
 	$1::return
 	$2::return
-	$3::return
-	$4::return
+	$3::
+	if LongPress(200)
+		Send, ^{Home}
+	Else
+		Send, {Home}
+	return
+
+	$4::
+	if LongPress(200)
+		Send, ^{End}
+	Else
+		Send, {End}
+	return
 	$5::return
 
     ; Top row remapping
@@ -332,11 +343,12 @@ Return
 	$g::Send {Right} ;l - move cursor right
 
     ; Bottom row remapping
-    $z::return
-    $x::return
-    $c::return
-    $v::return
-    $b::return
+    $z::Send, ^z
+	$^z::Send, ^y
+    $x::Send, ^{Left}
+    $c::Send, {WheelDown}
+    $v::Send, {WheelUp}
+    $b::Send, ^{Right}
 
 	; Define the hotkey to show or destroy the GUI
 	$Space::
@@ -351,7 +363,6 @@ Return
 		NUMBER_MODE := false
 
 		Gosub, Gui1Setup  ; Call the setup for the specific GUI
-
 	} else {
 		guiOpen := false
 		NORMAL_SPACE_MODE := false
