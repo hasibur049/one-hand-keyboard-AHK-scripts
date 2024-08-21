@@ -19,9 +19,9 @@ CoordMode, ToolTip
 global INSERT_MODE := true
 global INSERT_MODE_II := false ; Variable to track the state of the index layer
 global TOGGLE := false
-global VISUAL_SPACE_MODE := false
-global VISUAL_GUI_MODE := false
-global VISUAL_ALT_MODE := false
+global NORMAL_SPACE_MODE := false
+global NORMAL_GUI_MODE := false
+global NORMAL_ALT_MODE := false
 global SYMBOL_MODE := false
 global NUMBER_MODE := false
 global NUMPAD_SYMBOL_MODE := false ; Variable to track the state of the numpad symbol layer
@@ -29,8 +29,8 @@ global NUMPAD_NUMBER_MODE := false
 global IS_RBUTTON_DOWN := false ; Initialize flags to track the state of RButton down
 
 index_TooltipX := 960 ; tooltip 1 index layer
-visual_TooltipX_Space := index_TooltipX - 117 ; tooltip 2 visual layer
-visual_TooltipX_Alt := index_TooltipX - 117 ; tooltip 9 visual layer
+normal_TooltipX_Space := index_TooltipX - 117 ; tooltip 2 visual layer
+normal_TooltipX_Alt := index_TooltipX - 117 ; tooltip 9 visual layer
 ; A_CaretX-50, A_CaretY-50 ; tooltip 3 for display chord dict
 number_TooltipX := index_TooltipX + 100 ; tooltip 4 number layer
 symbol_TooltipX := index_TooltipX + 100 ; tooltip 5 symbol layer
@@ -193,7 +193,7 @@ return
 *c::
 	SetKeyDelay -1
 	Send {Backspace}
-	;Gosub, BackspaceLabel
+	Gosub, BackspaceLabel
 return
 *v::indexMode("d")
 *b::indexMode("k")
@@ -227,7 +227,7 @@ LCtrl & Alt::Reload	; Hotkey to reload the script
 LCtrl & Space::Suspend ; Hotkey to suspend the script
 
 Alt::
-	gosub, VisualLabelAlt
+	gosub, NormalLabelAlt
 return
 
 Tab::
@@ -241,7 +241,7 @@ return
 
 Space::
 if LongPress(200)
-	Gosub, VisualLabelSpace
+	Gosub, NormalLabelSpace
 Else
 	gosub, SpacebarLabel
 return
@@ -286,6 +286,75 @@ return
 ~Space & v::tapMode("v","{","}") ; two key hotkey
 ~Space & b::tapMode("b","`#","@") ; two key hotkey short/long
 
+
+/*
+   --------------------------------------------------
+   --------------------------------------------------
+   ----long press Space to active normal layer 1-----
+   --------------------------------------------------
+   --------------------------------------------------
+*/
+
+NormalLabelSpace:
+if !NORMAL_SPACE_MODE {
+	NORMAL_SPACE_MODE := true
+	SYMBOL_MODE := false
+	NUMBER_MODE := false
+	INSERT_MODE := false
+    INSERT_MODE_II := false
+
+	ToolTip,,,,4
+	ToolTip,,,,5
+	ToolTip,Normal, % normal_TooltipX_Space, 0, 2
+	}
+Return
+
+#If NORMAL_SPACE_MODE
+	;$1::#^c ;shortcut key to TOGGLE invert color filter
+	$1::Send #{PrintScreen}
+	$2::Send, {LWin}
+	$3::Send, {F5}
+	$4::Reload ; Hotkey to reload the script
+	$5::Suspend ; Hotkey to suspend the script
+
+	$d::Send {WheelUp}
+	$f::Send {WheelDown}
+
+	RShift & d::Send {WheelUp 5} ;scrollspeed:=5
+	RShift & f::Send {WheelDown 5} ;scrollspeed:=5
+
+	; Define the hotkey to show or destroy the GUI
+	$Space::
+	ToolTip,,,,2
+	ToolTip,,,,4
+	ToolTip,,,,5
+
+	if LongPress(200) {
+		guiOpen := true
+		NORMAL_SPACE_MODE := false
+		SYMBOL_MODE := false
+		NUMBER_MODE := false
+
+		Gosub, Gui1Setup  ; Call the setup for the specific GUI
+
+	} else {
+		guiOpen := false
+		NORMAL_SPACE_MODE := false
+		SYMBOL_MODE := false
+		NUMBER_MODE := false
+		INSERT_MODE := true
+
+		if TOGGLE {
+			INSERT_MODE_II := true
+
+			ToolTip, Index, % index_TooltipX, 0, 1
+		}
+		return
+	}
+	return
+#If
+return
+
 /*
    --------------------------------------------------
    --------------------------------------------------
@@ -293,357 +362,6 @@ return
    --------------------------------------------------
    --------------------------------------------------
 */
-
-; Define the remapped hotkeys only when the GUI is open
-#If (CurrentGui = 1)
-    ; Modifier/layer keys
-    $Alt::return
-    $Tab::return
-    $CapsLock::return
-    $Down::return
-    $Shift::return
-    $Ctrl::return
-    $Right::return
-
-    ; Top row remapping
-    $q::return
-    $w::HandleNumber(7)
-    $e::HandleNumber(8)
-    $r::HandleNumber(9)
-    $t::return
-
-    ; Home row remapping
-    $a::return
-    $s::HandleNumber(4)
-    $d::HandleNumber(5)
-    $f::HandleNumber(6)
-    $g::HandleNumber(0)
-
-    ; Bottom row remapping
-    $z::return
-    $x::HandleNumber(1)
-    $c::HandleNumber(2)
-    $v::HandleNumber(3)
-    $b::return
-#If
-
-; Handle number input and update live display
-HandleNumber(Number) {
-    global guiOpen, NumberInput, LastInputTime
-    if (guiOpen) {  ; Only process input when GUI is open
-        ; Only allow input if the length is less than 2 digits
-        if (StrLen(NumberInput) < 2) {
-            NumberInput .= Number  ; Append the new number to the input
-            LastInputTime := A_TickCount
-		}
-            GuiControl, 6:, InputText, %NumberInput%  ; Update the live input display
-            SetTimer, ProcessInput, -500  ; Start a timer to wait for 500ms
-
-    }
-}
-return
-
-ProcessInput:
-{
-    global guiOpen, NumberInput, LastInputTime
-    if (guiOpen && (A_TickCount - LastInputTime >= 500)) {
-        ; Check if the input is a valid button number
-        if (IsButtonNumber(NumberInput)) {
-				if (CurrentGui = 1)
-					Gosub, Gui1Button%NumberInput%Action  ; Trigger corresponding button action
-				else if (CurrentGui = 2)
-					Gosub, Gui2Button%NumberInput%Action  ; Trigger corresponding button action
-        } else {
-            ; If not a valid button number, reset the input
-            NumberInput := ""
-        }
-
-        ; Reset the display and input fields
-        GuiControl, 6:, InputText, ...  ; Clear the live input display
-        NumberInput := ""  ; Reset the input after handling
-    }
-}
-return
-
-IsButtonNumber(Number) {
-    ; Return true only for numbers between 11 and 45
-    return (Number >= 11 && Number <= 45) || (Number = 0) || (Number = 1)
-}
-
-
-; Actions for each button
-
-Gui1Button11Action:
-    ; Set volume to 0 (mute)
-	SoundSet, 0  ; Mute the system volume
-	Tooltip, Volume Min
-	Sleep, 1000
-    Tooltip
-return
-
-Gui1Button12Action:
-    ; Set volume to 100 (maximum)
-    SoundSet, 80, Master
-	Tooltip, Volume Maximum
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button13Action:
-    SoundSet, +0, , mute  ; This toggles mute/unmute for the default audio device
-	Tooltip, Vol Mute
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button14Action:
-    Tooltip, Hello! This is a tooltip 14.
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button15Action:
-	Tooltip, You clicked Button 15
-    Sleep, 1000
-	Tooltip
-return
-
-Gui1Button16Action:
-    Tooltip, You clicked Button 16
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button17Action:
-    Tooltip, You clicked Button 17
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button18Action:
-    Tooltip, You clicked Button 18
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button19Action:
-    Tooltip, You clicked Button 19
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button20Action:
-    Tooltip, You clicked Button 20
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button21Action:
-    Tooltip, You clicked Button 21
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button22Action:
-    Tooltip, You clicked Button 22
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button23Action:
-    Tooltip, You clicked Button 23
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button24Action:
-    Tooltip, You clicked Button 24
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button25Action:
-    Tooltip, You clicked Button 25
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button26Action:
-    Tooltip, You clicked Button 26
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button27Action:
-    Tooltip, You clicked Button 27
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button28Action:
-    Tooltip, You clicked Button 28 with %CurrentGui%
-    Sleep, 1000
-    Tooltip
-return
-
-
-Gui1Button29Action:
-    Tooltip, You clicked Button 29
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button30Action:
-    Tooltip, You clicked Button 30
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button31Action:
-    Tooltip, You clicked Button 31
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button32Action:
-    Tooltip, You clicked Button 32
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button33Action:
-    Tooltip, You clicked Button 33
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button34Action:
-    Tooltip, You clicked Button 34
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button35Action:
-    Tooltip, You clicked Button 35
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button36Action:
-    Tooltip, You clicked Button 36
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button37Action:
-    Tooltip, You clicked Button 37
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button38Action:
-    Tooltip, You clicked Button 38
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button39Action:
-    Tooltip, You clicked Button 39
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button40Action:
-    Tooltip, You clicked Button 40
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button41Action:
-    Tooltip, You clicked Button 41
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button42Action:
-    Tooltip, You clicked Button 42
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button43Action:
-    Tooltip, You clicked Button 43
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button44Action:
-    Tooltip, You clicked Button 44
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button45Action:
-    Tooltip, You clicked Button 45
-    Sleep, 1000
-    Tooltip
-return
-
-Gui1Button0Action:
-	Gosub, Gui2Setup
-return
-
-; --------------------------------------------------------------------------------------
-
-; Define the remapped hotkeys only when the GUI is open
-#If (CurrentGui = 2)
-    ; Modifier/layer keys
-    $Alt::return
-    $Tab::return
-    $CapsLock::return
-    $Down::return
-    $Shift::return
-    $Ctrl::return
-    $Right::return
-
-    ; Top row remapping
-    $q::return
-    $w::HandleNumber(7)
-    $e::HandleNumber(8)
-    $r::HandleNumber(9)
-    $t::return
-
-    ; Home row remapping
-    $a::HandleNumber(1)
-    $s::HandleNumber(4)
-    $d::HandleNumber(5)
-    $f::HandleNumber(6)
-    $g::HandleNumber(0)
-
-    ; Bottom row remapping
-    $z::return
-    $x::HandleNumber(1)
-    $c::HandleNumber(2)
-    $v::HandleNumber(3)
-    $b::return
-#If
-
-; Actions for each button
-Gui2Button28Action:
-    Tooltip, You clicked Button 28 with %CurrentGui%
-    Sleep, 1000
-    Tooltip
-return
-
-Gui2Button0Action:
-	Gosub, Gui3Setup
-return
-
-Gui2Button1Action:
-	Gosub, Gui1Setup
-return
-
-;-----------------------------------------------------------------------------------------
 
 ; Global variables to track which GUI is currently displayed
 global CurrentGui := 1
@@ -657,6 +375,56 @@ global guiOpen := false
     $3::gosub Gui3Setup
     $4::gosub Gui4Setup
     $5::gosub Gui5Setup
+
+    $Alt::return
+    $Tab::return
+    $CapsLock::return
+    $Down::return
+    $Shift::return
+    $Ctrl::return
+    $Right::return
+
+    ; Top row remapping
+    $q::return
+    $w::HandleNumber(7)
+    $e::HandleNumber(8)
+    $r::HandleNumber(9)
+    $t::return
+
+    ; Home row remapping
+	$a::HandleNumber(1)
+    $s::HandleNumber(4)
+    $d::HandleNumber(5)
+    $f::HandleNumber(6)
+    $g::HandleNumber(0)
+
+    ; Bottom row remapping
+    $z::return
+    $x::HandleNumber(1)
+    $c::HandleNumber(2)
+    $v::HandleNumber(3)
+    $b::return
+
+	$space::
+	Gui, 1:Destroy
+	Gui, 2:Destroy
+	Gui, 3:Destroy
+	Gui, 4:Destroy
+	Gui, 5:Destroy
+	Gui, 6:Destroy
+
+	guiOpen := false
+	NORMAL_SPACE_MODE := false
+	SYMBOL_MODE := false
+	NUMBER_MODE := false
+	INSERT_MODE := true
+
+	if TOGGLE {
+		INSERT_MODE_II := true
+
+		ToolTip, Index, % index_TooltipX, 0, 1
+	}
+	return
 #If
 
 ; Define the GUI setups
@@ -890,100 +658,292 @@ GoBack:
     }
 return
 
-
-/*
-   --------------------------------------------------
-   --------------------------------------------------
-   ----long press Space to active visual layer 1-----
-   --------------------------------------------------
-   --------------------------------------------------
-*/
-
-
-VisualLabelSpace:
-if !VISUAL_SPACE_MODE {
-	VISUAL_SPACE_MODE := true
-	SYMBOL_MODE := false
-	NUMBER_MODE := false
-	INSERT_MODE := false
-    INSERT_MODE_II := false
-
-	ToolTip,,,,4
-	ToolTip,,,,5
-	ToolTip,Visual 1, % visual_TooltipX_Space, 0, 2
-	}
-Return
-
-#If VISUAL_SPACE_MODE
-	;$1::#^c ;shortcut key to TOGGLE invert color filter
-	$1::Send #{PrintScreen}
-	$2::Send, {LWin}
-	$3::Send, {F5}
-	$4::Reload ; Hotkey to reload the script
-	$5::Suspend ; Hotkey to suspend the script
-
-	$d::Send {WheelUp}
-	$f::Send {WheelDown}
-
-	RShift & d::Send {WheelUp 5} ;scrollspeed:=5
-	RShift & f::Send {WheelDown 5} ;scrollspeed:=5
-
-	; Define the hotkey to show or destroy the GUI
-	$Space::
-	ToolTip,,,,2
-	ToolTip,,,,4
-	ToolTip,,,,5
-
-    if guiOpen {
-
-		Gui, 1:Destroy
-		Gui, 2:Destroy
-		Gui, 3:Destroy
-		Gui, 4:Destroy
-		Gui, 5:Destroy
-		Gui, 6:Destroy
-
-		guiOpen := false
-
-		VISUAL_SPACE_MODE := false
-		SYMBOL_MODE := false
-		NUMBER_MODE := false
-		INSERT_MODE := true
-
-		if TOGGLE {
-			INSERT_MODE_II := true
-
-			ToolTip, Index, % index_TooltipX, 0, 1
+; Handle number input and update live display
+HandleNumber(Number) {
+    global guiOpen, NumberInput, LastInputTime
+    if (guiOpen) {  ; Only process input when GUI is open
+        ; Only allow input if the length is less than 2 digits
+        if (StrLen(NumberInput) < 2) {
+            NumberInput .= Number  ; Append the new number to the input
+            LastInputTime := A_TickCount
 		}
-		return
+            GuiControl, 6:, InputText, %NumberInput%  ; Update the live input display
+            SetTimer, ProcessInput, -500  ; Start a timer to wait for 500ms
+
     }
-
-
-	if LongPress(200) {
-		SYMBOL_MODE := false
-		NUMBER_MODE := false
-
-		guiOpen := true
-		Gosub, Gui1Setup  ; Call the setup for the specific GUI
-
-	} else {
-
-		VISUAL_SPACE_MODE := false
-		SYMBOL_MODE := false
-		NUMBER_MODE := false
-		INSERT_MODE := true
-
-		if TOGGLE {
-			INSERT_MODE_II := true
-
-			ToolTip, Index, % index_TooltipX, 0, 1
-		}
-		return
-	}
-	return
-#If
+}
 return
 
+ProcessInput:
+{
+    global guiOpen, NumberInput, LastInputTime
+    if (guiOpen && (A_TickCount - LastInputTime >= 500)) {
+        ; Check if the input is a valid button number
+        if (IsButtonNumber(NumberInput)) {
+				if (CurrentGui = 1)
+					Gosub, Gui1Button%NumberInput%Action  ; Trigger corresponding button action
+				else if (CurrentGui = 2)
+					Gosub, Gui2Button%NumberInput%Action  ; Trigger corresponding button action
+        } else {
+            ; If not a valid button number, reset the input
+            NumberInput := ""
+        }
+
+        ; Reset the display and input fields
+        GuiControl, 6:, InputText, ...  ; Clear the live input display
+        NumberInput := ""  ; Reset the input after handling
+    }
+}
+return
+
+IsButtonNumber(Number) {
+    ; Return true only for numbers between 11 and 45
+    return (Number >= 11 && Number <= 45) || (Number = 0) || (Number = 1)
+}
+
+
+; Actions for each button gui 1
+
+Gui1Button11Action:
+    ; Set volume to 0 (mute)
+	SoundSet, 0  ; Mute the system volume
+	Tooltip, Volume Min
+	Sleep, 1000
+    Tooltip
+return
+
+Gui1Button12Action:
+    ; Set volume to 100 (maximum)
+    SoundSet, 80, Master
+	Tooltip, Volume Maximum
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button13Action:
+    SoundSet, +0, , mute  ; This toggles mute/unmute for the default audio device
+	Tooltip, Vol Mute
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button14Action:
+    Tooltip, Hello! This is a tooltip 14.
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button15Action:
+	Tooltip, You clicked Button 15
+    Sleep, 1000
+	Tooltip
+return
+
+Gui1Button16Action:
+    Tooltip, You clicked Button 16
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button17Action:
+    Tooltip, You clicked Button 17
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button18Action:
+    Tooltip, You clicked Button 18
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button19Action:
+    Tooltip, You clicked Button 19
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button20Action:
+    Tooltip, You clicked Button 20
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button21Action:
+    Tooltip, You clicked Button 21
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button22Action:
+    Tooltip, You clicked Button 22
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button23Action:
+    Tooltip, You clicked Button 23
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button24Action:
+    Tooltip, You clicked Button 24
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button25Action:
+    Tooltip, You clicked Button 25
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button26Action:
+    Tooltip, You clicked Button 26
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button27Action:
+    Tooltip, You clicked Button 27
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button28Action:
+    Tooltip, You clicked Button 28 with %CurrentGui%
+    Sleep, 1000
+    Tooltip
+return
+
+
+Gui1Button29Action:
+    Tooltip, You clicked Button 29
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button30Action:
+    Tooltip, You clicked Button 30
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button31Action:
+    Tooltip, You clicked Button 31
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button32Action:
+    Tooltip, You clicked Button 32
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button33Action:
+    Tooltip, You clicked Button 33
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button34Action:
+    Tooltip, You clicked Button 34
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button35Action:
+    Tooltip, You clicked Button 35
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button36Action:
+    Tooltip, You clicked Button 36
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button37Action:
+    Tooltip, You clicked Button 37
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button38Action:
+    Tooltip, You clicked Button 38
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button39Action:
+    Tooltip, You clicked Button 39
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button40Action:
+    Tooltip, You clicked Button 40
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button41Action:
+    Tooltip, You clicked Button 41
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button42Action:
+    Tooltip, You clicked Button 42
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button43Action:
+    Tooltip, You clicked Button 43
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button44Action:
+    Tooltip, You clicked Button 44
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button45Action:
+    Tooltip, You clicked Button 45
+    Sleep, 1000
+    Tooltip
+return
+
+Gui1Button1Action:
+return
+
+Gui1Button0Action:
+	Gosub, Gui2Setup
+return
+
+; --------------------------------------------------------------------------------------
+
+
+; Actions for each button gui 2
+Gui2Button28Action:
+    Tooltip, You clicked Button 28 with %CurrentGui%
+    Sleep, 1000
+    Tooltip
+return
+
+Gui2Button0Action:
+	Gosub, Gui3Setup
+return
+
+Gui2Button1Action:
+	Gosub, Gui1Setup
+return
 
 /*
    ----------------------------------------------
@@ -997,8 +957,8 @@ NumberLebelTab:
 if !NUMBER_MODE {
 	NUMBER_MODE := true
 	SYMBOL_MODE := false
-	VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
 	INSERT_MODE := false
 	;INSERT_MODE_II := false
 
@@ -1041,8 +1001,8 @@ Return
 	$Tab::
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
-	VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
 	INSERT_MODE := true
 
 	if TOGGLE {
@@ -1073,8 +1033,8 @@ SymbolLebelCapsLock:
 if !SYMBOL_MODE {
 	SYMBOL_MODE := true
 	NUMBER_MODE := false
-	VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
 	INSERT_MODE := false
 	;INSERT_MODE_II := false
 
@@ -1117,8 +1077,8 @@ Return
 	$CapsLock::
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
-	VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
 	INSERT_MODE := true
 
 	if (TOGGLE) {
@@ -1175,8 +1135,8 @@ return
 Down::
 	; Activate the numpad symbol layer
 	NUMPAD_SYMBOL_MODE := true
-	VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
 	INSERT_MODE := false
@@ -1202,8 +1162,8 @@ Down Up::
     ; Reset other modes and show the appropriate tooltip
     SYMBOL_MODE := false
     NUMBER_MODE := false
-    VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+    NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
     INSERT_MODE := true
 
     if TOGGLE {
@@ -1272,8 +1232,8 @@ return
 Right::
 	; Activate the numpad number layer
 	NUMPAD_NUMBER_MODE := true
-	VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
 	SYMBOL_MODE := false
 	NUMBER_MODE := false
 	INSERT_MODE := false
@@ -1299,8 +1259,8 @@ Right Up::
     ; Reset other modes and show the appropriate tooltip
     SYMBOL_MODE := false
     NUMBER_MODE := false
-    VISUAL_SPACE_MODE := false
-	VISUAL_ALT_MODE := false
+    NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
     INSERT_MODE := true
 
     if TOGGLE {
@@ -1369,10 +1329,10 @@ return
 */
 
 
-VisualLabelAlt:
-if !VISUAL_ALT_MODE {
-	VISUAL_ALT_MODE := true
-	VISUAL_SPACE_MODE := false
+NormalLabelAlt:
+if !NORMAL_ALT_MODE {
+	NORMAL_ALT_MODE := true
+	NORMAL_SPACE_MODE := false
 	NUMBER_MODE := false
 	SYMBOL_MODE := false
 	INSERT_MODE := false
@@ -1381,11 +1341,11 @@ if !VISUAL_ALT_MODE {
 	ToolTip,,,,2
 	ToolTip,,,,4
 	ToolTip,,,,5
-	ToolTip,Visual 2, % visual_TooltipX_Alt, 0, 9
+	ToolTip,Visual 2, % normal_TooltipX_Alt, 0, 9
 }
 Return
 
-#If VISUAL_ALT_MODE
+#If NORMAL_ALT_MODE
 	;home row
 	$s::Send {Left} ;h - move cursor left
 	$d::Send {Down} ;j - move cursor down
@@ -1394,8 +1354,8 @@ Return
 
 $Alt::
 Space::
-	VISUAL_ALT_MODE := false
-	VISUAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
+	NORMAL_SPACE_MODE := false
 	NUMBER_MODE := false
 	SYMBOL_MODE := false
 	INSERT_MODE := true
@@ -1416,7 +1376,7 @@ Space::
 	}
 
 	if LongPress(200)
-		Gosub, VisualLabelSpace
+		Gosub, NormalLabelSpace
 	return
 #If
 return
