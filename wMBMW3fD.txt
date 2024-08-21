@@ -33,4 +33,5 @@ RBRC: Right Bracket ]
 LCBR: Left Curly Brace {
 RCBR: Right Curly Brace }
 asterisk *
+PSCR" refers to the "Print Screen" key
 
