@@ -310,18 +310,33 @@ if !NORMAL_SPACE_MODE {
 Return
 
 #If NORMAL_SPACE_MODE
-	;$1::#^c ;shortcut key to TOGGLE invert color filter
-	$1::Send #{PrintScreen}
-	$2::Send, {LWin}
-	$3::Send, {F5}
-	$4::Reload ; Hotkey to reload the script
-	$5::Suspend ; Hotkey to suspend the script
+	;fn row
+	$1::return
+	$2::return
+	$3::return
+	$4::return
+	$5::return
 
-	$d::Send {WheelUp}
-	$f::Send {WheelDown}
+    ; Top row remapping
+    $q::Send, {Tab}
+    $w::return
+    $e::return
+    $r::return
+    $t::return
 
-	RShift & d::Send {WheelUp 5} ;scrollspeed:=5
-	RShift & f::Send {WheelDown 5} ;scrollspeed:=5
+	;home row
+	$a::return
+	$s::Send {Left} ;h - move cursor left
+	$d::Send {Down} ;j - move cursor down
+	$f::Send {Up} ;k - move cursor up
+	$g::Send {Right} ;l - move cursor right
+
+    ; Bottom row remapping
+    $z::return
+    $x::return
+    $c::return
+    $v::return
+    $b::return
 
 	; Define the hotkey to show or destroy the GUI
 	$Space::
@@ -370,19 +385,12 @@ global guiOpen := false
 
 ; Define the remapped hotkeys for switching between GUIs
 #If guiOpen
+	;fn row
     $1::gosub Gui1Setup
     $2::gosub Gui2Setup
     $3::gosub Gui3Setup
     $4::gosub Gui4Setup
     $5::gosub Gui5Setup
-
-    $Alt::return
-    $Tab::return
-    $CapsLock::return
-    $Down::return
-    $Shift::return
-    $Ctrl::return
-    $Right::return
 
     ; Top row remapping
     $q::return
@@ -405,6 +413,13 @@ global guiOpen := false
     $v::HandleNumber(3)
     $b::return
 
+    $Alt::return
+    $Tab::return
+    $CapsLock::return
+    $Down::return
+    $Shift::return
+    $Ctrl::return
+    $Right::return
 	$space::
 	Gui, 1:Destroy
 	Gui, 2:Destroy
@@ -1323,7 +1338,7 @@ return
 /*
    --------------------------------------------------
    --------------------------------------------------
-   -------press alt to active visual layer 2---------
+   -------press alt to active normal layer 2---------
    --------------------------------------------------
    --------------------------------------------------
 */
@@ -1341,43 +1356,47 @@ if !NORMAL_ALT_MODE {
 	ToolTip,,,,2
 	ToolTip,,,,4
 	ToolTip,,,,5
-	ToolTip,Visual 2, % normal_TooltipX_Alt, 0, 9
+	ToolTip,Normal 2, % normal_TooltipX_Alt, 0, 9
 }
 Return
 
 #If NORMAL_ALT_MODE
-	;home row
-	$s::Send {Left} ;h - move cursor left
-	$d::Send {Down} ;j - move cursor down
-	$f::Send {Up} ;k - move cursor up
-	$g::Send {Right} ;l - move cursor right
+	;$1::#^c ;shortcut key to TOGGLE invert color filter
+	$1::Send #{PrintScreen}
+	$2::Send, {LWin}
+	$3::Send, {F5}
+	$4::Reload ; Hotkey to reload the script
+	$5::Suspend ; Hotkey to suspend the script
 
-$Alt::
-Space::
-	NORMAL_ALT_MODE := false
-	NORMAL_SPACE_MODE := false
-	NUMBER_MODE := false
-	SYMBOL_MODE := false
-	INSERT_MODE := true
+	$d::Send {WheelUp 5} ;scrollspeed:=5
+	$f::Send {WheelDown 5} ;scrollspeed:=5
 
-	if TOGGLE {
-		INSERT_MODE_II := true
+	$Alt::
+	Space::
+		NORMAL_ALT_MODE := false
+		NORMAL_SPACE_MODE := false
+		NUMBER_MODE := false
+		SYMBOL_MODE := false
+		INSERT_MODE := true
 
-		ToolTip,,,,2
-		ToolTip,,,,4
-		ToolTip,,,,5
-		ToolTip,,,,9
-		ToolTip, Index, % index_TooltipX, 0, 1
-	} else {
-		ToolTip,,,,2
-		ToolTip,,,,4
-		ToolTip,,,,5
-		ToolTip,,,,9
-	}
+		if TOGGLE {
+			INSERT_MODE_II := true
 
-	if LongPress(200)
-		Gosub, NormalLabelSpace
-	return
+			ToolTip,,,,2
+			ToolTip,,,,4
+			ToolTip,,,,5
+			ToolTip,,,,9
+			ToolTip, Index, % index_TooltipX, 0, 1
+		} else {
+			ToolTip,,,,2
+			ToolTip,,,,4
+			ToolTip,,,,5
+			ToolTip,,,,9
+		}
+
+		if LongPress(200)
+			Gosub, NormalLabelSpace
+		return
 #If
 return
 
