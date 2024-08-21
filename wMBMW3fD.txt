@@ -25,3 +25,10 @@ LAYER 1---------------------------------------------
     COMM       S       E      ^2       A       W
       ^3       N       I       V       F       K
      GUI    CAPS     ALT      ^4    BSPC     SPC
+
+LPRN: Left Parenthesis (
+RPRN: Right Parenthesis )
+LBRC: Left Bracket [
+RBRC: Right Bracket ]
+LCBR: Left Curly Brace {
+RCBR: Right Curly Brace }
