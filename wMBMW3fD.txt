@@ -32,3 +32,5 @@ LBRC: Left Bracket [
 RBRC: Right Bracket ]
 LCBR: Left Curly Brace {
 RCBR: Right Curly Brace }
+asterisk *
+
