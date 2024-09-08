@@ -1,0 +1,12 @@
+dpt|department |0
+btw|by the way |0
+bd|bangladesh |0
+ind|india |0
+ahk|autohotkey |0
+cd|chord |0
+eng|English |0
+hrs|Hasibur Rahman Shanto |0
+asam|As-salamu alaykum |0
+@|@gmail.com|10
+s@|shanto.ewu99@gmail.com|0
+
