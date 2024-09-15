@@ -357,6 +357,12 @@ LCtrl & d::
 	}
 return
 
+LCtrl & a::Send, ^x
+LCtrl & s::Send, ^z
+LCtrl & z::Send, ^c
+
+LCtrl & x::Send, ^v
+
 LWin::Alt
 LCtrl & Alt::Reload	; Hotkey to reload the script
 LCtrl & Space::Suspend ; Hotkey to suspend the script
@@ -482,8 +488,24 @@ if !VIM_NORMAL_SPACE_MODE {
 Return
 
 #If VIM_NORMAL_SPACE_MODE
+; Detect mouse click and drag (selection)
+~LButton::
+    MouseGetPos, x1, y1
+    KeyWait, LButton, D  ; Wait for left mouse button down
+    KeyWait, LButton, U  ; Wait for left mouse button up
+    MouseGetPos, x2, y2
+
+    ; Check if the mouse was dragged (i.e., x1 != x2 or y1 != y2)
+    if (x1 != x2 or y1 != y2) {
+		Sleep, 100
+        ; Simulate pressing 'v' to enter visual mode in Vim
+		char_visual := true
+		gosub, Vim_VisualLabel
+    }
+return
 
 	;$Tab::Send, r
+/*
 	$CapsLock::
 		Send, r
 
@@ -503,7 +525,7 @@ Return
 			ToolTip, Index, % index_TooltipX, 0, 1
 		}
 	return
-
+*/
 	;fn row
 	;$1::return
 	$2::
@@ -582,7 +604,7 @@ Return
 		Send, V
 		gosub, Vim_VisualLabel
 	return
-	/*
+/*
 	^s:: ; ctrl
 		 block_visual := true
 
@@ -593,10 +615,10 @@ Return
 
     ; Bottom row remapping
     $z::Send, b ;jump backwards to the start of a word
-	$^z::Send, ^r ;redo
     $x::Send, {WheelUp}
     $c::Send, {WheelDown}
-    $v::Send, w ;jump forwards to the start of a word
+    $v::Send, w ;jump forwards to the start of a worddd
+
     $b::
 		keyPress := Morse(200)
 		If (keyPress = "00")
@@ -2722,8 +2744,21 @@ Return
 
 
 #IfWinActive, ahk_class Chrome_WidgetWin_1 ahk_exe chrome.exe
-	;$Space::Send, {Space Down}
-	;$Space Up::Send, {Space Up}
+
+/*
+; Remap 'v' to 'f' only when YouTube is active
+~v::
+    ; Check if YouTube is in the active tab's URL
+    if WinActive("ahk_class Chrome_WidgetWin_1") {
+        WinGetTitle, Title, A
+        if (InStr(Title, "YouTube")) {
+            Send f  ; Remap 'v' to 'f' on YouTube
+        }
+    }
+return
+*/
+	$Space::Send, {Space Down}
+	$Space Up::Send, {Space Up}
 
 ;$Space::Send, i
 /*
