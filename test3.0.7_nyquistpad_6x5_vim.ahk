@@ -159,10 +159,22 @@ return
 ~d & g::AltTab
 ~d & v::Send {Right}
 ~d & x::Send {Left}
-~d & r::return
-d & Space::
-	Gosub, Gui1Setup
+~d & r::
+	Send, {End}{Enter}
 return
+~d & Space::
+	g := Morse(200)
+	If (g = "0") {
+		Gosub, Gui1Setup
+	}
+	Else If (g = "1") {
+
+	}
+	Else If (g = "00") {
+		;Send,
+	}
+Return
+
 
 	#If INSERT_MODE_II ; start of INSERT_MODE_II
 	;fn row
@@ -371,25 +383,24 @@ LCtrl & Space::Suspend ; Hotkey to suspend the script
 
 Alt::
 	if VIM_NORMAL_SPACE_MODE
-		Send, i
+		Send, a
 
 	gosub, NormalLabelAlt
 return
 
 Tab::
 	if VIM_NORMAL_SPACE_MODE
-		Send, i
+		Send, a
 
 	gosub, NumberLebelTab
 return
 
 CapsLock::
 	if VIM_NORMAL_SPACE_MODE
-		Send, i
+		Send, a
 
 	gosub, SymbolLebelCapsLock
 return
-
 
 
 /*
@@ -416,7 +427,8 @@ if LongPress(200) {  ; Check if Space key is held down for more than 200ms
 	if WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") {
 		Send, {Esc}
 		Gosub, Vim_NormalLabelSpace  ; Trigger Vim_NormalLabelSpace if VS Code is active
-    }
+    } ;else
+		;Gosub, NormalLabelSpace  ; Trigger NormalLabelSpace if VS Code is not active
 } else {
 		SetKeyDelay -1
 		Send {space} ; Action for short press
@@ -486,6 +498,87 @@ return
    --------------------------------------------------
    --------------------------------------------------
 */
+/*
+NormalLabelSpace:
+if !NORMAL_SPACE_MODE {
+	NORMAL_SPACE_MODE := false
+
+	CHECK_IS_ON_VIM_NORMAL_SPACE_MODE := false
+	VIM_NORMAL_SPACE_MODE := false
+	NORMAL_ALT_MODE := false
+	SYMBOL_MODE := false
+	NUMBER_MODE := false
+	INSERT_MODE := false
+    INSERT_MODE_II := false
+
+	ToolTip,,,,4
+	ToolTip,,,,5
+	ToolTip,,,,9
+	ToolTip,Normal, % vim_normal_TooltipX_Space, 0, 2
+	}
+Return
+
+#If NORMAL_SPACE_MODE
+
+	;fn row
+	;$1::return
+	$2::return
+	$3::return
+	$4::return
+	;$5::return
+
+    ; Top row remapping
+    $q::return
+    $w::return
+    $e::return
+    $r::return
+    $t::return
+
+	; home row
+	$a::Send {Left} ;h - move cursor left
+	$s::Send {Up} ;k - move cursor up
+	$f::Send {Right} ;l - move cursor right
+	$d::Send {Down} ;j - move cursor down
+	$g::Return
+
+
+    ; Bottom row remapping
+    $z::return
+    $x::Send, {WheelUp}
+    $c::Send, {WheelDown}
+    $v::return
+
+
+	; Define the hotkey to show or destroy the GUI
+	$Space::
+	ToolTip,,,,2
+	ToolTip,,,,4
+	ToolTip,,,,5
+	NORMAL_SPACE_MODE := false
+
+	CHECK_IS_ON_VIM_NORMAL_SPACE_MODE := false
+	VIM_NORMAL_SPACE_MODE := false
+	SYMBOL_MODE := false
+	NUMBER_MODE := false
+	INSERT_MODE := true
+
+	if TOGGLE {
+		INSERT_MODE_II := true
+
+		ToolTip, Index, % index_TooltipX, 0, 1
+	}
+	return
+#If
+return
+*/
+
+/*
+   ---------------------------------------------------
+   ---------------------------------------------------
+   ---long press Space to active vim normal layer 1---
+   ---------------------------------------------------
+   ---------------------------------------------------
+*/
 
 Vim_NormalLabelSpace:
 if !VIM_NORMAL_SPACE_MODE {
@@ -531,20 +624,7 @@ return
 #If VIM_NORMAL_SPACE_MODE
 
 ; Detect mouse click and drag (selection)
-~LButton::
-    MouseGetPos, x1, y1
-    KeyWait, LButton, D  ; Wait for left mouse button down
-    KeyWait, LButton, U  ; Wait for left mouse button up
-    MouseGetPos, x2, y2
-
-    ; Check if the mouse was dragged (i.e., x1 != x2 or y1 != y2)
-    if (x1 != x2 or y1 != y2) {
-		Sleep, 100
-        ; Simulate pressing 'v' to enter visual mode in Vim
-		char_visual := true
-		gosub, Vim_VisualLabel
-    }
-return
+~LButton::return
 
 	;$Tab::Send, r
 /*
@@ -569,7 +649,7 @@ return
 	return
 */
 	CapsLock & q::
-		Send, ^{Tab}
+		Send, ^1
 		Send, {Esc}
 		Gosub, Vim_NormalLabelSpace  ; Trigger Vim_NormalLabelSpace if VS Code is active and mode is enabled
 	return
@@ -610,27 +690,13 @@ return
 	$d::Send {Down} ;j - move cursor down
 
 	$g::
-		g := Morse(200)
-		If (g = "00") {
-		Send, {Alt Down}
-		Send, {Tab}
-		Send, {Alt Up}
-		ToolTip,,,,2
-		ToolTip,,,,4
-		ToolTip,,,,5
+	g := Morse(200)
+	If (g = "00") {
+		 block_visual := true
 
-		;guiOpen := false
-		CHECK_IS_ON_VIM_NORMAL_SPACE_MODE := true
-		VIM_NORMAL_SPACE_MODE := false
-		SYMBOL_MODE := false
-		NUMBER_MODE := false
-		INSERT_MODE := true
-
-		if TOGGLE {
-			INSERT_MODE_II := true
-
-			ToolTip, Index, % index_TooltipX, 0, 1
-		}
+		Send, ^v
+		gosub, Vim_VisualLabel
+	return
 	}
 	Else If (g = "0") {
 		char_visual := true
@@ -639,27 +705,13 @@ return
 		gosub, Vim_VisualLabel
 	}
 	Else If (g = "1") {
-		 block_visual := true
-
-		Send, ^v
-		gosub, Vim_VisualLabel
-	}
-	Return
-
-	+s:: ; shift
 		 line_visual := true
 
 		Send, V
 		gosub, Vim_VisualLabel
-	return
-/*
-	^s:: ; ctrl
-		 block_visual := true
+	}
+	Return
 
-		Send, ^v
-		gosub, Vim_VisualLabel
-	return
-    */
 
     ; Bottom row remapping
     $z::Send, b ;jump backwards to the start of a word
@@ -2173,7 +2225,8 @@ if (layer = 2) {
 	$q::
 	if WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") {
 
-		Send, ^{Tab}
+		Send, ^1
+
 		if CHECK_IS_ON_VIM_NORMAL_SPACE_MODE {
 			Gosub, Vim_NormalLabelSpace  ; Trigger Vim_NormalLabelSpace if VS Code is active
 
@@ -2208,7 +2261,7 @@ return
 
     $w::Send, {Up}
     $a::Send, {Left}
-    $s::Send, {Down}
+  ee  $s::Send, {Down}
     $d::Send, {Right}
 #If
 
@@ -2579,32 +2632,38 @@ return
 
 RButton::
 	g := Morse(300)
-	If (g = "1") {
-		Send, +{LButton}
-		Send, ^c ; single long click to copy text
+	If (g = "00") {
 
-		ToolTip, Copied!, 900, 500, 8
+		if WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") {
+			if !VIM_NORMAL_SPACE_MODE {
 
-		; Hide the tooltip after 1 second
-		SetTimer, HideTooltip, -1000
+				Clipboard := ""  ; Clear the clipboard
+				Send, ^c        ; Simulate Ctrl+C to copy selected text
+				ClipWait, 1     ; Wait for up to 1 second for the clipboard to contain data
+				if (ErrorLevel)
+					MsgBox, Clipboard did not contain any data within 1 second.
+				else
+					MsgBox, Copied text: %Clipboard% ; Show the copied content
+			}
+			Send, a
+
+    	}
+/*
+			else
+			Clipboard := ""  ; Clear the clipboard
+			Send, ^c        ; Simulate Ctrl+C to copy selected text
+			ClipWait, 1     ; Wait for up to 1 second for the clipboard to contain data
+			if (ErrorLevel)
+				MsgBox, Clipboard did not contain any data within 1 second.
+			else
+				MsgBox, Copied text: %Clipboard% ; Show the copied content
+*/
 	}
-	/*
-	Else If (g = "01")
-		Send ^z ; short long to click undo action
-	Else If (g = "10")
-		Send ^y  ; long short to click redo action
-    */
-	Else If (g = "00")
-		Send ^v  ; double short click to paste from clipboard
 	Else If (g = "0")
 		Send {RButton} ; single short click to send rbutton
 
 Return
-
-; Function to hide the tooltip
-HideTooltip:
-    ToolTip,,,,8
-return
+;---------------------------------------------------------------------------
 
 ; --------------------------------------------------------------------------
 
