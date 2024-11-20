@@ -70,7 +70,15 @@ ActiveWindowChanged(hWnd, *) {
 
     VIM_NORMAL_SPACE_MODE := false
     VISUAL_MODE := false
-    INSERT_MODE := true
+
+    /*
+    if !guiOpen
+        INSERT_MODE := true
+    else
+        INSERT_MODE := false
+    */
+
+    INSERT_MODE := !guiOpen ;INSERT_MODE := !guiOpen is a shorter, cleaner way of writing the same logic above.
 
     if WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") {
         ; Get the active window's title
@@ -179,16 +187,13 @@ $d Up::
 ~d & t:: Send "{Delete}"
 ~d & w:: Send "{Home} {Up} {End} {Enter}"
 ~d & r:: Send "{End} {Enter}"
-
 ~d & Space::
 {
-    g := Morse(200)
-    If (g = "0")
+    if LongPress(200) {   ; Check if Space key is held down for more than 200ms
+        ToolTip("Long Press !")
+        SetTimer(() => ToolTip(""), -1000)  ; Clear the tooltip after 1 second
+    } else
         Gui1Setup()  ; Call the function directly
-    Else If (g = "1")
-        return
-    Else If (g = "00")
-        return
 }
 
 #HotIf INSERT_MODE_II ; start of INSERT_MODE_II
@@ -1567,16 +1572,6 @@ $d:: Send("{Right}")
 
 $w:: Send("{WheelUp 5}")    ; Scroll up quickly when TOGGLE is on
 $s::
-{
-    g := Morse(200)
-
-    If (g = "0")
-        Gui1Setup()  ; Call the function directly
-    Else If (g = "1")
-        return
-    Else If (g = "00")
-        return
-}
 $d:: Send("{WheelDown 5}")
 
 #HotIf ; End of this conditional block
@@ -1952,9 +1947,8 @@ checkGui() {
     global SYMBOL_MODE
     global NUMBER_MODE
     global INSERT_MODE
-    global INSERT_MODE_II
 
-	; Code to execute after the jump
+; Code to execute after the jump
 if !guiOpen {
     guiOpen := true
     VIM_NORMAL_SPACE_MODE := false
@@ -1962,18 +1956,37 @@ if !guiOpen {
     SYMBOL_MODE := false
     NUMBER_MODE := false
     INSERT_MODE := false
-    INSERT_MODE_II := false
     }
 }
 
 ; Define the remapped hotkeys for switching between GUIs
 #HotIf guiOpen
 	;fn row
-    $1:: Gui1Setup()
-    $2:: Gui2Setup()
-    $3:: Gui3Setup()
-    $4:: Gui4Setup()
-    $5:: Gui5Setup()
+    $1::
+    {
+        DestroyGui()
+        Gui1Setup()
+    }
+    $2::
+    {
+        DestroyGui()
+        Gui2Setup()
+    }
+    $3::
+    {
+        DestroyGui()
+        Gui3Setup()
+    }
+    $4::
+    {
+        DestroyGui()
+        Gui4Setup()
+    }
+    $5::
+    {
+        DestroyGui()
+        Gui5Setup()
+    }
 
     ; Top row remapping
     $q::return
@@ -2004,53 +2017,54 @@ if !guiOpen {
     $Ctrl::return
     $Right::return
 
-$space::
-{
-    global oGui1, oGui2, oGui3, oGui4, oGui5, oGui6
+    $space::
+    {
+        global oGui1, oGui2, oGui3, oGui4, oGui5, oGui6
 
-    global guiOpen, VIM_NORMAL_SPACE_MODE, SYMBOL_MODE, NUMBER_MODE
-    global TOGGLE, INSERT_MODE, INSERT_MODE_II
+        global guiOpen, VIM_NORMAL_SPACE_MODE, SYMBOL_MODE, NUMBER_MODE
+        global TOGGLE, INSERT_MODE, INSERT_MODE_II
 
-    ; Destroy existing GUIs if they exist
-    if IsObject(oGui1) {
-        oGui1.Destroy()
-        oGui1 := "" ; Optional: Reset variable to indicate no GUI is assigned
-    }
-    if IsObject(oGui2) {
-        oGui2.Destroy()
-        oGui2 := ""
-    }
-    if IsObject(oGui3) {
-        oGui3.Destroy()
-        oGui3 := ""
-    }
-    if IsObject(oGui4) {
-        oGui4.Destroy()
-        oGui4 := ""
-    }
-    if IsObject(oGui5) {
-        oGui5.Destroy()
-        oGui5 := ""
-    }
-    if IsObject(oGui6) {
-        oGui6.Destroy()
-        oGui6 := ""
-    }
+        ; Destroy existing GUIs if they exist
+        if IsObject(oGui1) {
+            oGui1.Destroy()
+            oGui1 := "" ; Optional: Reset variable to indicate no GUI is assigned
+        }
+        if IsObject(oGui2) {
+            oGui2.Destroy()
+            oGui2 := ""
+        }
+        if IsObject(oGui3) {
+            oGui3.Destroy()
+            oGui3 := ""
+        }
+        if IsObject(oGui4) {
+            oGui4.Destroy()
+            oGui4 := ""
+        }
+        if IsObject(oGui5) {
+            oGui5.Destroy()
+            oGui5 := ""
+        }
+        if IsObject(oGui6) {
+            oGui6.Destroy()
+            oGui6 := ""
+        }
 
-    guiOpen := false
-    VIM_NORMAL_SPACE_MODE := false
-    SYMBOL_MODE := false
-    NUMBER_MODE := false
-    INSERT_MODE := true
+        guiOpen := false
+        VIM_NORMAL_SPACE_MODE := false
+        SYMBOL_MODE := false
+        NUMBER_MODE := false
+        INSERT_MODE := true
 
-    if TOGGLE {
-        INSERT_MODE_II := true
-        ToolTip("Index", index_TooltipX, 0, 1)
+        if TOGGLE {
+            INSERT_MODE_II := true
+            ToolTip("Index", index_TooltipX, 0, 1)
+        }
     }
-}
 #HotIf
 
 liveDisplayGui() {
+
     ; Calculate the position for the input display GUI
     ScreenWidth := A_ScreenWidth ; 1920
     ScreenHeight := A_ScreenHeight ; 1080
@@ -2081,8 +2095,8 @@ liveDisplayGui() {
 
 ; Define the GUI setups
 Gui1Setup() {
-    global guiOpen, CurrentGui
-	checkGui()
+    global CurrentGui
+    checkGui()
 	CurrentGui := 1
 
     ; Create the GUI window
@@ -2101,7 +2115,7 @@ Gui1Setup() {
 	ogcGui1Button13Action.OnEvent("Click", Gui1Button13Action)
 	global ogcGui1Button14Action := oGui1.Add("Button", "x101 y359 w140 h110 BackgroundTrans ", "Show Tooltip")
 	ogcGui1Button14Action.OnEvent("Click", Gui1Button14Action)
-	global ogcGui1Button15Action := oGui1.Add("Button", "x101 y479 w140 h110 BackgroundTrans ", "INSERT_MODE: " . INSERT_MODE)
+	global ogcGui1Button15Action := oGui1.Add("Button", "x101 y479 w140 h110 BackgroundTrans ", "Null Value")
 	ogcGui1Button15Action.OnEvent("Click", Gui1Button15Action)
 ;-------------------------------------------------------
 	global ogcGui1Button16Action := oGui1.Add("Button", "x251 y1 w140 h110 BackgroundTrans ", "Button 16")
@@ -2130,7 +2144,7 @@ Gui1Setup() {
 	ogcGui1Button26Action.OnEvent("Click", Gui1Button26Action)
 	global ogcGui1Button27Action := oGui1.Add("Button", "x551 y119 w140 h110 BackgroundTrans ", "Button 27")
 	ogcGui1Button27Action.OnEvent("Click", Gui1Button27Action)
-	global ogcGui1Button28Action := oGui1.Add("Button", "x551 y239 w140 h110 BackgroundTrans ", CurrentGui)
+	global ogcGui1Button28Action := oGui1.Add("Button", "x551 y239 w140 h110 BackgroundTrans ", " Current Gui " CurrentGui)
 	ogcGui1Button28Action.OnEvent("Click", Gui1Button28Action)
 	global ogcGui1Button29Action := oGui1.Add("Button", "x551 y359 w140 h110 BackgroundTrans ", "Button 29")
 	ogcGui1Button29Action.OnEvent("Click", Gui1Button29Action)
@@ -2170,8 +2184,7 @@ Gui1Setup() {
 	global ogcGui1Button45Action := oGui1.Add("Button", "x1001 y479 w140 h110 BackgroundTrans ", "Button 45")
 	ogcGui1Button45Action.OnEvent("Click", Gui1Button45Action)
 
-	global ogcGui1Button0Action := oGui1.Add("Button", "x1151 y239 w50 h110 BackgroundTrans ", "Next")
-	ogcGui1Button0Action.OnEvent("Click", Gui1Button0Action)
+	oGui1.Add("Button", "x1151 y239 w50 h110 BackgroundTrans ", "Next").OnEvent("Click", Gui1Button0Action)
 
     oGui1.OnEvent('Close', (*) => ExitApp())
 	oGui1.Title := "Control Panel"
@@ -2182,9 +2195,8 @@ Gui1Setup() {
 
 ; Define the GUI setups
 Gui2Setup() {
-    global guiOpen, CurrentGui
-
-	checkGui()
+    global CurrentGui
+    checkGui()
 	CurrentGui := 2
 
     ; Create the GUI window
@@ -2194,8 +2206,7 @@ Gui2Setup() {
     ;Set 0x000000 (black) to be transparent (A: 255)
     WinSetTransColor((oGui2.BackColor := 000000) ' 255', oGui2)
 
-    global ogcGui2Button1Action := oGui2.Add("Button", "x41 y239 w50 h110 BackgroundTrans ", "Prev")
-	ogcGui2Button1Action.OnEvent("Click", Gui2Button1Action)
+    oGui2.Add("Button", "x41 y239 w50 h110 BackgroundTrans ", "Prev").OnEvent("Click", Gui2Button1Action)
 
 	; Add transparent buttons w 150 h 120
 	global ogcGui2Button11Action := oGui2.Add("Button", "x101 y1 w140 h110 BackgroundTrans", "Volume Min")
@@ -2206,7 +2217,7 @@ Gui2Setup() {
 	;ogcGui2Button13Action.OnEvent("Click", Gui2Button13Action)
 	global ogcGui2Button14Action := oGui2.Add("Button", "x101 y359 w140 h110 BackgroundTrans ", "Show Tooltip")
 	;ogcGui2Button14Action.OnEvent("Click", Gui2Button14Action)
-	global ogcGui2Button15Action := oGui2.Add("Button", "x101 y479 w140 h110 BackgroundTrans ", "guiOpen: " . guiOpen)
+	global ogcGui2Button15Action := oGui2.Add("Button", "x101 y479 w140 h110 BackgroundTrans ", "Null Value")
 	ogcGui2Button15Action.OnEvent("Click", Gui2Button15Action)
 ;-------------------------------------------------------
 	global ogcGui2Button16Action := oGui2.Add("Button", "x251 y1 w140 h110 BackgroundTrans ", "Button 16")
@@ -2235,7 +2246,7 @@ Gui2Setup() {
 	;ogcGui2Button26Action.OnEvent("Click", Gui2Button26Action)
 	global ogcGui2Button27Action := oGui2.Add("Button", "x551 y119 w140 h110 BackgroundTrans ", "Button 27")
 	;ogcGui2Button27Action.OnEvent("Click", Gui2Button27Action)
-	global ogcGui2Button28Action := oGui2.Add("Button", "x551 y239 w140 h110 BackgroundTrans ", CurrentGui)
+	global ogcGui2Button28Action := oGui2.Add("Button", "x551 y239 w140 h110 BackgroundTrans ", " Current Gui " CurrentGui)
 	ogcGui2Button28Action.OnEvent("Click", Gui2Button28Action)
 	global ogcGui2Button29Action := oGui2.Add("Button", "x551 y359 w140 h110 BackgroundTrans ", "Button 29")
 	;ogcGui2Button29Action.OnEvent("Click", Gui2Button29Action)
@@ -2275,67 +2286,66 @@ Gui2Setup() {
 	global ogcGui2Button45Action := oGui2.Add("Button", "x1001 y479 w140 h110 BackgroundTrans ", "Button 45")
 	;ogcGui2Button45Action.OnEvent("Click", Gui2Button45Action)
 
-	global ogcGui2Button0Action := oGui2.Add("Button", "x1151 y239 w50 h110 BackgroundTrans ", "Next")
-	ogcGui2Button0Action.OnEvent("Click", Gui2Button0Action)
+    oGui2.Add("Button", "x1151 y239 w50 h110 BackgroundTrans ", "Next").OnEvent("Click", Gui2Button0Action)
 
     oGui2.OnEvent('Close', (*) => ExitApp())
 	oGui2.Title := "Control Panel"
 	oGui2.Show("w1246 h621")  ; Display the GUI with the buttons
+
+    liveDisplayGui()
 }
 
 Gui3Setup() {
-    global guiOpen, CurrentGui
-
+    global CurrentGui
 	checkGui()
 	CurrentGui := 3
 
     global oGui3 := Gui("+LastFound +AlwaysOnTop -Caption +ToolWindow")
     oGui3.BackColor := "EEAA99"
-    oGui3.Add("Text", "x10 y10 w200 h30", CurrentGui)
+    oGui3.Add("Text", "x10 y10 w200 h30", " Current Gui " CurrentGui)
 
-    global ogcGui3Button1Action := oGui3.Add("Button", "x100 y100 w200 h50 ", "Prev")
-	ogcGui3Button1Action.OnEvent("Click", Gui3Button1Action)
-	global ogcGui3Button0Action := oGui3.Add("Button", "x100 y200 w200 h50 ", "Next")
-	ogcGui3Button0Action.OnEvent("Click", Gui3Button0Action)
+    oGui3.Add("Button", "x100 y100 w200 h50 ", "Prev").OnEvent("Click", Gui3Button1Action)
+	oGui3.Add("Button", "x100 y200 w200 h50 ", "Next").OnEvent("Click", Gui3Button0Action)
 
     oGui3.Title := "Control Panel"
     oGui3.Show("w400 h300")
+
+    liveDisplayGui()
 }
 
 Gui4Setup() {
-    global guiOpen, CurrentGui
-
+    global CurrentGui
 	checkGui()
 	CurrentGui := 4
 
     global oGui4 := Gui("+LastFound +AlwaysOnTop -Caption +ToolWindow")
     oGui4.BackColor := "EEAA99"
-    oGui4.Add("Text", "x10 y10 w200 h30", CurrentGui)
+    oGui4.Add("Text", "x10 y10 w200 h30", " Current Gui " CurrentGui)
 
-    global ogcGui4Button1Action := oGui4.Add("Button", "x100 y100 w200 h50 ", "Prev")
-	ogcGui4Button1Action.OnEvent("Click", Gui4Button1Action)
-	global ogcGui4Button0Action := oGui4.Add("Button", "x100 y200 w200 h50 ", "Next")
-	ogcGui4Button0Action.OnEvent("Click", Gui4Button0Action)
+    oGui4.Add("Button", "x100 y100 w200 h50 ", "Prev").OnEvent("Click", Gui4Button1Action)
+	oGui4.Add("Button", "x100 y200 w200 h50 ", "Next").OnEvent("Click", Gui4Button0Action)
 
     oGui4.Title := "Control Panel"
     oGui4.Show("w400 h300")
+
+    liveDisplayGui()
 }
 
 Gui5Setup() {
-    global guiOpen, CurrentGui
-
+    global CurrentGui
 	checkGui()
 	CurrentGui := 5
 
     global oGui5 := Gui("+LastFound +AlwaysOnTop -Caption +ToolWindow")
     oGui5.BackColor := "EEAA99"
-    oGui5.Add("Text", "x10 y10 w200 h30", CurrentGui)
+    oGui5.Add("Text", "x10 y10 w200 h30", " Current Gui " CurrentGui)
 
-    global ogcGui5Button1Action := oGui5.Add("Button", "x100 y100 w200 h50 ", "Prev")
-	ogcGui5Button1Action.OnEvent("Click", Gui5Button1Action)
+    oGui5.Add("Button", "x100 y100 w200 h50 ", "Prev").OnEvent("Click", Gui5Button1Action)
 
     oGui5.Title := "Control Panel"
     oGui5.Show("w400 h300")
+
+    liveDisplayGui()
 }
 
 ; Handle number input and update live display
@@ -2356,7 +2366,6 @@ HandleNumber(Num) {
 ProcessInput()
 {
     global guiOpen, NumberInput, LastInputTime, oGui6
-
     if (guiOpen && (A_TickCount - LastInputTime >= 500)) {
         ; Check if the input is a valid button number
 
@@ -2370,8 +2379,6 @@ ProcessInput()
             Gui4Button%NumberInput%Action()  ; Trigger corresponding button action
         else if (CurrentGui = 5) && (Gui5ButtonNumber(NumberInput))
             Gui5Button%NumberInput%Action()  ; Trigger corresponding button action
-        else
-            NumberInput := "" ; If not a valid button number, reset the input
 
     ; Reset the display and input fields
     oGui6["LiveDisplay"].Value := "..."  ; Clear the live input display
@@ -2380,24 +2387,25 @@ ProcessInput()
 }
 
 Gui1ButtonNumber(Num) {
-    return (Num >= 11 && Num <= 45) || (Num = 0) || (Num = 1) ; Return true only for numbers between 11 and 45
+    return (Num != "") && (Num >= 11 && Num <= 45) || (Num = 0) || (Num = 1) ; Return true only for numbers between 11 and 45 or 0/1 and when number can't be an empty strings
 }
 
 Gui2ButtonNumber(Num) {
-    return (Num = 0) || (Num = 1) || (Num = 15) || (Num = 28)
+    return (Num != "") && (Num = 0) || (Num = 1) || (Num = 15) || (Num = 28)
 }
 
 Gui3ButtonNumber(Num) {
-    return (Num = 0) || (Num = 1)
+    return (Num != "") && (Num = 0) || (Num = 1)
 }
 
 Gui4ButtonNumber(Num) {
-    return (Num = 0) || (Num = 1)
+    return (Num != "") && (Num = 0) || (Num = 1)
 }
 
 Gui5ButtonNumber(Num) {
-    return (Num = 0) || (Num = 1)
+    return (Num != "") && (Num = 0) || (Num = 1)
 }
+
 ; -----------------------------DestroyGui--------------------------------------
 
 DestroyGui() {
@@ -2424,6 +2432,10 @@ DestroyGui() {
         oGui5.Destroy()
         oGui5 := ""
     }
+    if IsObject(oGui6) {
+        oGui6.Destroy()
+        oGui6 := ""
+    }
 }
 
 Gui1Button1Action(*) ; 1 for prev
@@ -2431,6 +2443,12 @@ Gui1Button1Action(*) ; 1 for prev
 }
 
 Gui1Button0Action(*) ; 0 for next
+{
+    DestroyGui()
+    Gui2Setup()
+}
+
+Gui1Button00Action(*) ; 0 for next
 {
     DestroyGui()
     Gui2Setup()
@@ -2448,6 +2466,12 @@ Gui2Button0Action(*) ; 0 for next
     Gui3Setup()
 }
 
+Gui2Button00Action(*) ; 0 for next
+{
+    DestroyGui()
+    Gui3Setup()
+}
+
 Gui3Button1Action(*) ; 1 for prev
 {
     DestroyGui()
@@ -2455,6 +2479,12 @@ Gui3Button1Action(*) ; 1 for prev
 }
 
 Gui3Button0Action(*) ; 0 for next
+{
+    DestroyGui()
+    Gui4Setup()
+}
+
+Gui3Button00Action(*) ; 0 for next
 {
     DestroyGui()
     Gui4Setup()
@@ -2472,6 +2502,12 @@ Gui4Button0Action(*) ; 0 for next
     Gui5Setup()
 }
 
+Gui4Button00Action(*) ; 0 for next
+{
+    DestroyGui()
+    Gui5Setup()
+}
+
 Gui5Button1Action(*) ; 1 for prev
 {
     DestroyGui()
@@ -2482,12 +2518,14 @@ Gui5Button0Action(*) ; 0 for next
 {
 }
 
+Gui5Button00Action(*) ; 0 for next
+{
+}
+
 ; ---------------------------------Gui1-----------------------------------------
 
 Gui1Button11Action(*)
 {
-    ;global ogcGui1Button11Action
-
     ; Set volume to 0 (mute)
 	SoundSetVolume(0)  ; Mute the system volume
 	ToolTip(ogcGui1Button11Action.Text)
@@ -2755,276 +2793,206 @@ Gui2Button28Action(*)
    -----------------------------------------------
 */
 
-/*
-RButton::
+global gui50 := ""
+
+MButton::
 {
-
-    g := Morse(300)
-    If (g = "00") {
-        ;MsgBox("00 Pressed")
-
-
-        if WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") {
-            if !VIM_NORMAL_SPACE_MODE {
-
-                A_Clipboard := ""  ; Clear the clipboard
-                Send("^ c")        ; Simulate Ctrl+C to copy selected text
-                Errorlevel := !ClipWait(1)     ; Wait for up to 1 second for the clipboard to contain data
-                if (ErrorLevel)
-                    MsgBox("Clipboard did not contain any data within 1 second.")
-                else
-                    MsgBox("Copied text: " A_Clipboard) ; Show the copied content
-            }
-            Send("a")
-        }
-*/
-
-/*
-else
-    Clipboard := ""  ; Clear the clipboard
-Send, ^ c        ; Simulate Ctrl+C to copy selected text
-ClipWait, 1     ; Wait for up to 1 second for the clipboard to contain data
-if (ErrorLevel)
-    MsgBox, Clipboard did not contain any data within 1 second.
-else
-    MsgBox, Copied text: %Clipboard% ; Show the copied content
-*/
-/*
-    }
-    Else If (g = "0")
- MsgBox("0 Pressed")
-    ;Send "{ RButton }" ; single short click to send rbutton
-    Return
-}
-*/
-;---------------------------------------------------------------------------
-
-; --------------------------------------------------------------------------
-/*
-mbutton::
-{ ; V1toV2: Added bracket
-    global ; V1toV2: Made function global
     CoordMode("Mouse", "Screen")
     MouseGetPos(&XposA, &YposA)
     XposA -= 80
     YposA -= 80
-    oGui50 := Gui()
-    oGui50.destroy()
-    oGui50.BackColor := "EEAA99"
+
+    ; Check if Gui(50) already exists and destroy it if so
+    global gui50  ; Declare the GUI variable globally
+    if IsObject(gui50)
+        gui50.Destroy()
+
+    gui50 := Gui(50)  ; Create a new GUI object
+    gui50.BackColor := "EEAA99"
+
+    ;Set 0x000000 (black) to be transparent (A: 255)
+    WinSetTransColor((gui50.BackColor := 000000) ' 255', gui50)
 
     ; Buttons (1st column)
-    ogcButtonButton1 := oGui50.Add("Button", "x2 y0 w50 h50 BackgroundTrans gdothis10", "Button 1")
-    ogcButtonButton1.OnEvent("Click", 50ButtonButton1.Bind("Normal"))
-    ogcButtonUndo := oGui50.Add("Button", "x2 y60 w50 h50 BackgroundTrans gdothis20", "Undo")
-    ogcButtonUndo.OnEvent("Click", 50ButtonUndo.Bind("Normal"))
-    ogcButtonRedo := oGui50.Add("Button", "x2 y120 w50 h50 BackgroundTrans gdothis30", "Redo")
-    ogcButtonRedo.OnEvent("Click", 50ButtonRedo.Bind("Normal"))
-    ogcButton := oGui50.Add("Button", "x2 y180 w50 h50 BackgroundTrans gdothis40")
-    ogcButton.OnEvent("Click", 50Button.Bind("Normal"))
-    ogcButton := oGui50.Add("Button", "x2 y240 w50 h50 BackgroundTrans gdothis50")
-    ogcButton.OnEvent("Click", 50Button.Bind("Normal"))
+    gui50.Add("Button", "x2 y0 w50 h50 BackgroundTrans", "Button 1").OnEvent("Click", dothis10)
+    gui50.Add("Button", "x2 y60 w50 h50 BackgroundTrans", "Undo").OnEvent("Click", dothis20)
+    gui50.Add("Button", "x2 y120 w50 h50 BackgroundTrans", "Redo").OnEvent("Click", dothis30)
+    gui50.Add("Button", "x2 y180 w50 h50 BackgroundTrans")
+    gui50.Add("Button", "x2 y240 w50 h50 BackgroundTrans")
 
     ; Buttons (2nd column)
-    ogcButton := oGui50.Add("Button", "x62 y0 w50 h50")
-    ogcButton.OnEvent("Click", 50Button.Bind("Normal"))
-    ogcButtonCut := oGui50.Add("Button", "x62 y60 w50 h50 BackgroundTrans gdothis3", "Cut")
-    ogcButtonCut.OnEvent("Click", 50ButtonCut.Bind("Normal"))
-    ogcButtonClose := oGui50.Add("Button", "x62 y120 w50 h50 BackgroundTrans gclosewanrmenu", "Close")
-    ogcButtonClose.OnEvent("Click", 50ButtonClose.Bind("Normal"))
-    ogcButtonNewButton9 := oGui50.Add("Button", "x62 y180 w50 h50 BackgroundTrans gdothis14", "New Button 9")
-    ogcButtonNewButton9.OnEvent("Click", 50ButtonNewButton9.Bind("Normal"))
-    ogcButtonNewButton10 := oGui50.Add("Button", "x62 y240 w50 h50 BackgroundTrans gdothis15", "New Button 10")
-    ogcButtonNewButton10.OnEvent("Click", 50ButtonNewButton10.Bind("Normal"))
+    gui50.Add("Button", "x62 y0 w50 h50")
+    gui50.Add("Button", "x62 y60 w50 h50 BackgroundTrans", "Cut").OnEvent("Click", dothis3)
+    gui50.Add("Button", "x62 y120 w50 h50 BackgroundTrans", "Close").OnEvent("Click", closewarnmenu)
+    gui50.Add("Button", "x62 y180 w50 h50 BackgroundTrans", "New Button 9").OnEvent("Click", dothis14)
+    gui50.Add("Button", "x62 y240 w50 h50 BackgroundTrans", "New Button 10").OnEvent("Click", dothis15)
 
     ; Buttons (3rd column)
-    ogcButtonMinimize := oGui50.Add("Button", "x122 y0 w50 h50 BackgroundTrans gdothis5", "Minimize")
-    ogcButtonMinimize.OnEvent("Click", 50ButtonMinimize.Bind("Normal"))
-    ogcButtonCopy := oGui50.Add("Button", "x122 y60 w50 h50 BackgroundTrans gdothis4", "Copy")
-    ogcButtonCopy.OnEvent("Click", 50ButtonCopy.Bind("Normal"))
-    ogcButtonNewButton11 := oGui50.Add("Button", "x122 y180 w50 h50 BackgroundTrans gdothis11", "New Button 11")
-    ogcButtonNewButton11.OnEvent("Click", 50ButtonNewButton11.Bind("Normal"))
-    ogcButtonNewButton12 := oGui50.Add("Button", "x122 y240 w50 h50 BackgroundTrans gdothis32", "New Button 12")
-    ogcButtonNewButton12.OnEvent("Click", 50ButtonNewButton12.Bind("Normal"))
+    gui50.Add("Button", "x122 y0 w50 h50 BackgroundTrans", "Minimize").OnEvent("Click", dothis5)
+    gui50.Add("Button", "x122 y60 w50 h50 BackgroundTrans", "Copy").OnEvent("Click", dothis4)
+    gui50.Add("Button", "x122 y180 w50 h50 BackgroundTrans", "New Button 11").OnEvent("Click", dothis11)
+    gui50.Add("Button", "x122 y240 w50 h50 BackgroundTrans", "New Button 12").OnEvent("Click", dothis32)
 
     ; Buttons (4th column)
-    ogcButtonMaximize := oGui50.Add("Button", "x182 y0 w50 h50 BackgroundTrans gdothis1", "Maximize")
-    ogcButtonMaximize.OnEvent("Click", 50ButtonMaximize.Bind("Normal"))
-    ogcButtonPaste := oGui50.Add("Button", "x182 y60 w50 h50 BackgroundTrans gdothis2", "Paste")
-    ogcButtonPaste.OnEvent("Click", 50ButtonPaste.Bind("Normal"))
-    ogcButtonNewButton13 := oGui50.Add("Button", "x182 y120 w50 h50 BackgroundTrans gdothis13", "New Button 13")
-    ogcButtonNewButton13.OnEvent("Click", 50ButtonNewButton13.Bind("Normal"))
-    ogcButtonNewButton14 := oGui50.Add("Button", "x182 y180 w50 h50 BackgroundTrans gdothis14", "New Button 14")
-    ogcButtonNewButton14.OnEvent("Click", 50ButtonNewButton14.Bind("Normal"))
-    ogcButtonNewButton59 := oGui50.Add("Button", "x182 y240 w50 h50 BackgroundTrans gdothis59", "New Button 59")
-    ogcButtonNewButton59.OnEvent("Click", 50ButtonNewButton59.Bind("Normal"))
-    ; New Buttons (5th column)
-    ogcButtonClose := oGui50.Add("Button", "x242 y0 w50 h50 BackgroundTrans gdothis9", "Close")
-    ogcButtonClose.OnEvent("Click", 50ButtonClose.Bind("Normal"))
-    ogcButtonSelectAll := oGui50.Add("Button", "x242 y60 w50 h50 BackgroundTrans gdothis100", "Select All")
-    ogcButtonSelectAll.OnEvent("Click", 50ButtonSelectAll.Bind("Normal"))
-    ogcButtonNewButton6 := oGui50.Add("Button", "x242 y120 w50 h50 BackgroundTrans gdothis111", "New Button 6")
-    ogcButtonNewButton6.OnEvent("Click", 50ButtonNewButton6.Bind("Normal"))
-    ogcButtonNewButton99 := oGui50.Add("Button", "x242 y180 w50 h50 BackgroundTrans gdothis99", "New Button 99")
-    ogcButtonNewButton99.OnEvent("Click", 50ButtonNewButton99.Bind("Normal"))
-    ogcButtonNewButton78 := oGui50.Add("Button", "x242 y240 w50 h50 BackgroundTrans gdothis78", "New Button 78")
-    ogcButtonNewButton78.OnEvent("Click", 50ButtonNewButton78.Bind("Normal"))
+    gui50.Add("Button", "x182 y0 w50 h50 BackgroundTrans", "Maximize").OnEvent("Click", dothis1)
+    gui50.Add("Button", "x182 y60 w50 h50 BackgroundTrans", "Paste").OnEvent("Click", dothis2)
+    gui50.Add("Button", "x182 y120 w50 h50 BackgroundTrans", "New Button 13").OnEvent("Click", dothis13)
+    gui50.Add("Button", "x182 y180 w50 h50 BackgroundTrans", "New Button 14").OnEvent("Click", dothis14)
+    gui50.Add("Button", "x182 y240 w50 h50 BackgroundTrans", "New Button 59").OnEvent("Click", dothis59)
 
-    oGui50.Opt("+LastFound +AlwaysOnTop +ToolWindow")
-    WinSetTransColor("EEAA99")
-    oGui50.Opt("-Caption")
-    oGui50.Title := "menus"
-    oGui50.Show("x" . XposA . " y" . YposA . " h300 w299") ; Adjust width to accommodate the new columns
-    Return
+    ; Buttons (5th column)
+    gui50.Add("Button", "x242 y0 w50 h50 BackgroundTrans", "WinClose").OnEvent("Click", dothis9)
+    gui50.Add("Button", "x242 y60 w50 h50 BackgroundTrans", "Select All").OnEvent("Click", dothis100)
+    gui50.Add("Button", "x242 y120 w50 h50 BackgroundTrans", "New Button 6").OnEvent("Click", dothis111)
+    gui50.Add("Button", "x242 y180 w50 h50 BackgroundTrans", "New Button 99").OnEvent("Click", dothis99)
+    gui50.Add("Button", "x242 y240 w50 h50 BackgroundTrans", "New Button 78").OnEvent("Click", dothis78)
 
-    SetTitleMatchMode(2)
-
-closewanrmenu:
-    oGui50.Destroy()
-    return
-
-    ; Button actions
-dothis1:
-    oGui50.Destroy()
-    WinMaximize("A")
-    Return
-
-dothis2:
-    Send("^p")
-    Return
-
-dothis3:
-    Send("^x")
-    Return
-
-dothis4:
-    Send("^c")
-    Return
-
-dothis5:
-    oGui50.Destroy()
-    WinMinimize("A")
-    Return
-
-dothis6:
-    oGui50.Destroy()
-    MsgBox("New Button 1")
-    Return
-
-dothis7:
-    oGui50.Destroy()
-    MsgBox("New Button 2")
-    Return
-
-dothis8:
-    oGui50.Destroy()
-    MsgBox("New Button 3")
-    Return
-
-dothis9:
-    oGui50.Destroy()
-    WinClose("A")
-    Return
-
-dothis10:
-    oGui50.Destroy()
-    MsgBox("New Button 5")
-    Return
-
-dothis11:
-    oGui50.Destroy()
-    MsgBox("New Button 6")
-    Return
-
-dothis12:
-    oGui50.Destroy()
-    MsgBox("New Button 7")
-    Return
-
-dothis13:
-    oGui50.Destroy()
-    MsgBox("New Button 8")
-    Return
-
-dothis14:
-    oGui50.Destroy()
-    MsgBox("New Button 9")
-    Return
-
-dothis15:
-    oGui50.Destroy()
-    MsgBox("New Button 10")
-    Return
-
-dothis20:
-    Send("^z") ;undo
-    Return
-
-dothis30:
-    Send("^y") ;redo
-    Return
-
-dothis32:
-    oGui50.Destroy()
-    MsgBox("New Button 17")
-    Return
-
-dothis40:
-    oGui50.Destroy()
-    MsgBox("New Button 13")
-    Return
-
-dothis50:
-    oGui50.Destroy()
-    MsgBox("New Button 14")
-    Return
-
-dothis100:
-    Send("^a")
-    Return
-
-dothis111:
-    oGui50.Destroy()
-    MsgBox("New Button 15")
-    Return
-
-dothis59:
-    oGui50.Destroy()
-    MsgBox("New Button 59")
-    Return
-
-dothis99:
-    oGui50.Destroy()
-    MsgBox("New Button 99")
-    Return
-
-dothis78:
-    oGui50.Destroy()
-    MsgBox("New Button 78")
-    Return
+    gui50.Opt("+LastFound +AlwaysOnTop +ToolWindow -Caption")
+    gui50.Title := "menus"  ; Set the window title
+    gui50.Show("x" XposA " y" YposA " h300 w299")  ; Show the GUI without a title parameter
 }
-*/
 
-/*
+
+closewarnmenu(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+}
+
+dothis1(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    WinMaximize("A")
+}
+
+dothis2(*) {
+    Send("^p")
+}
+
+dothis3(*) {
+    Send("^x")
+}
+
+dothis4(*) {
+    Send("^c")
+}
+
+dothis5(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    WinMinimize("A")
+}
+
+dothis9(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    WinClose("A")
+}
+
+dothis10(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    MsgBox("New Button 5")
+}
+
+dothis11(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+
+    MsgBox("New Button 6")
+}
+
+dothis13(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+
+    MsgBox("New Button 8")
+}
+
+dothis14(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+
+    MsgBox("New Button 9")
+}
+
+dothis15(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+
+    MsgBox("New Button 10")
+}
+
+dothis20(*) {
+    Send("^z")
+}
+
+dothis30(*) {
+    Send("^y")
+}
+
+dothis32(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    MsgBox("New Button 17")
+}
+
+dothis59(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    MsgBox("New Button 59")
+}
+
+dothis78(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    MsgBox("New Button 78")
+}
+
+dothis100(*) {
+    Send("^a")
+}
+
+dothis111(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    MsgBox("New Button 15")
+}
+
+dothis99(*) {
+    if IsObject(gui50)
+        gui50.Destroy()
+    MsgBox("New Button 99")
+}
+
+;--------------------------------------------------------------
+
 f1::
 {
-    global ; V1toV2: Made function global
     MyMenu := Menu()
     MyMenu.Add("A Item 1", item1handler)
     MyMenu.Add("B Item 2", item2handler)
     MyMenu.Show()
-    Return
-} ; V1toV2: Added bracket before function
-item1handler(A_ThisMenuItem := "", A_ThisMenuItemPos := "", MyMenu := "", *)
-{ ; V1toV2: Added bracket
-    global ; V1toV2: Made function global
+}
+
+item1handler(A_ThisMenuItem := "", A_ThisMenuItemPos := "", MyMenu := "", *) {
     MsgBox("You pressed item 1")
-    Return
-} ; V1toV2: Added Bracket before label
-item2handler(A_ThisMenuItem := "", A_ThisMenuItemPos := "", MyMenu := "", *)
-{ ; V1toV2: Added bracket
-    global ; V1toV2: Made function global
+}
+
+item2handler(A_ThisMenuItem := "", A_ThisMenuItemPos := "", MyMenu := "", *) {
     MsgBox("You pressed item 2")
-    Return
+}
+
+;-----------------------------------------------------
+
+/*
+RButton::
+{
+    g := Morse(300)
+
+    If (g = "00") {
+    }
+    Else If (g = "0")
+        MsgBox("0 Pressed")
 }
 */
 
