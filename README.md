@@ -5,25 +5,46 @@ This is my personal keyboard layout. It is designed for use with only the left h
 ---------------
 ### Index Layer
 1. Start/End Index Layer:
-- Press `F` key to start/end.
+- Press `D` key to start/end.
 2. Switch Layers:
-- While the `Index` is on/off, press the `symbol`/`numpad`/`visual 1?2`<br> to switch layers.
+- While the `Index` is I/II, press the `symbol`/`numpad`/`visual 1?2`<br> to switch layers.
 ```
-Index Layer off
+Index Layer I
 
-|       |        |   TAB  |   ENT  |    X   |        |
+|       |Capslock|   TAB  |   ENT  |    X   |        |
 |       |    Q   |    H   |    T   |    I   |    P   |
 |       |    S   |    E   |  Index [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |    D   |    K   |
 |       |        |        |                          |
 
-Index Layer on
+Index Layer II
 
-|       |        |        |   BS   |        |        |
+|       |Capslock|   Tab  |        |    x   |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
 |       |    U   |    O   |        [[   R  ]]    C   |
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
+```
+
+--------------------
+### Space with N key
+- Press any key While `Space` key down and `index` layer I.
+```
+
+|       |        |        |        |        |        |
+|       |        |   /\   |   -_   |   =+   |   &$   |
+|       |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
+|       |   <>   |   []   |   ()   |   {}   |   #@   |
+|       |        |        |           Space          |
+```
+- Press any key While `Space` key down and `index` layer on.
+```
+
+|       |        |        |        |        |        |
+|       |        |    2   |   3    |   4    |    -   |
+|       |   +    |    1   |   0    [[  5   ]]    9   |
+|       |   *    |    6   |   7    |   8    |    .   |
+|       |        |        |           Space          |
 ```
 -------------------------
 ### Number & Symbol Layer
@@ -34,7 +55,7 @@ Index Layer on
 ```
 Number/Numpad Layer 
 
-|       |        |        |    BS  |        |        |
+|       |        |        |        |        |        |
 |Numpad |        |   7    |    8   |    9   |        |
 |       |        |   4    |    5   [[   6  ]]    0   |
 |       |        |   1    |    2   |    3   |        |
@@ -54,56 +75,7 @@ Symbol Layer
 short tap to send ;
 long tap (160ms) to send :
 ```
---------------------
-### Space with N key
-- Press any key While `Space` key down and `index` layer off.
-```
 
-|       |        |    9   |    8   |    7   |        |
-|       |        |   /\   |   -_   |   =+   |   &$   |
-|       |   !%   |   '"   |   ;:   [[  .,  ]]   *?   |
-|       |   <>   |   []   |   ()   |   {}   |   #@   |
-|       |        |        |           Space          |
-```
-- Press any key While `Space` key down and `index` layer on.
-```
-
-|       |        |    9   |   8    |   7    |        |
-|       |        |    5   |   1    |   0    |    9   |
-|       |   6    |  Left  |  Down  [[  Up  ]]  Right |
-|       |   7    |    4   |   3    |   2    |    8   |
-|       |        |        |           Space          |
-```
-----------------
-### Visual Layer
-1. Start/End Visual 1:
-- Long press `Space` (200ms) key to start.
-- Short press `Space` key to end.
-2. Switch Layers:
-- While the `Visual 1` is on, press the `symbol`/`numpad`/`visual 2`<br> to switch layers.
-```
-Visual 1
-
-|       |        |        |        |        |        |
-|       |        |        |        |        |        |
-|       |        |        |WheelUp [WheelDn ]        |
-|       |        |        |        |        |        |
-|       |        |        |                          |
-```
-1. Start/End Visual 2:
-- Press `Alt` to start.
-- Press `Alt`/`Space` to end.
-2. Switch Layers:
-- While the ` Visual 2` is on, press the `symbol`/`numpad`/`visual 1`<br> to switch layers.
-```
-Visual 2
-
-|       |        |        |        |        |        |
-|       |        |        |        |        |        |
-|       |        |        |        [[      ]]        |
-|       |        |        |        |        |        |
-|       |        |        |                          |
-```
 --------------------------
 ### vim VS Code 
 Normal Mode
@@ -217,6 +189,36 @@ d: Delete the selected block.
 y: Yank the selected block.
 p: Paste the block after the selection.
 r: Replace selected characters with a single character.
+```
+----------------
+### Visual Layer
+1. Start/End Visual 1:
+- Long press `Space` (200ms) key to start.
+- Short press `Space` key to end.
+2. Switch Layers:
+- While the `Visual 1` is on, press the `symbol`/`numpad`/`visual 2`<br> to switch layers.
+```
+Visual 1
+
+|       |        |        |        |        |        |
+|       |        |        |        |        |        |
+|       |        |        |WheelUp [WheelDn ]        |
+|       |        |        |        |        |        |
+|       |        |        |                          |
+```
+1. Start/End Visual 2:
+- Press `Alt` to start.
+- Press `Alt`/`Space` to end.
+2. Switch Layers:
+- While the ` Visual 2` is on, press the `symbol`/`numpad`/`visual 1`<br> to switch layers.
+```
+Visual 2
+
+|       |        |        |        |        |        |
+|       |        |        |        |        |        |
+|       |        |        |        [[      ]]        |
+|       |        |        |        |        |        |
+|       |        |        |                          |
 ```
 --------------------------
 ### Quarty Keyboard Layout
