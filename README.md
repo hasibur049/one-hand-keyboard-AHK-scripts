@@ -37,7 +37,7 @@ Index Layer II
 |       |   <>   |   []   |   ()   |   {}   |   #@   |
 |       |        |        |           Space          |
 ```
-- Press any key While `Space` key down and `index` layer on.
+- Press any key While `Space` key down and `index` layer II.
 ```
 
 |       |        |        |        |        |        |
