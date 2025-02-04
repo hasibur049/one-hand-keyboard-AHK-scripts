@@ -180,14 +180,58 @@ Examples: cc, cw, ciw, c$
 Visual mode
 
 ```
-Visual Mode (character-wise selection) (Index Layer off)
+Visual Mode (character-wise selection)
 
-|       |        |   TAB  |   ENT  |    X   |        |
-|       |    Q   |    H   |    T   |    I   |    P   |
-|       |    S   |    E   |  Index [[   A  ]]    W   |
-|       |    N   |    L   |   BS   |    D   |    K   |
-|       |        |        |                          |
+Alt: return
+Tab: return
+CapsLock: return
+Down: return
+Shift: return
+Ctrl: return
+Right: return
 
+;fn row
+1: return
+2:
+("gg") go to the first line of the document
+("^") jump to the first non-blank character of the line
+3: return
+4:
+("G") go to the last line of the document
+("$") jump to the end of the line
+5: return
+
+; Top row
+q: return
+w:
+Send "d" // Vim_NormalLabelSpace()  ; Trigger Vim_NormalLabelSpace if VS Code is active
+e:
+Send "y" //Vim_NormalLabelSpace()  ; Trigger Vim_NormalLabelSpace if VS Code is active
+r:
+Send "c"
+t: "p" put (paste) the clipboard after cursor
+
+; home row
+a: "Left" move cursor left
+s: "Up" move cursor up
+f: "Right" move cursor right
+d: "Down" move cursor down
+g: send "ESC"
+
+; Bottom row 
+z: "b" jump backwards to the start of a word
+^z: "^r" redo
+x: "WheelUp"
+c: "WheelDown"
+v: "w" jump forwards to the start of a word
+b: return
+
+Space:
+(g = "00") "o" double short click to go next line and enter insert mode
+(g = "1") "a" long click to go to the next char where the curser point and enter insert mode
+(g = "0") "i" short click to go to the prev char where the curser point and enter insert mode
+
+-------------
 q: 
 h: Move left.
 t: Move right.
