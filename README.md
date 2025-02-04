@@ -19,7 +19,7 @@ Index Layer I
 
 Index Layer II
 
-|       |CapsLock|   Tab  |        |    x   |        |
+|       |CapsLock|   TAB  |        |    x   |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
 |       |    U   |    O   |        [[   R  ]]    C   |
 |       |    M   |    Y   |    V   |    F   |    P   |
