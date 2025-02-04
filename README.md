@@ -78,16 +78,54 @@ long tap (160ms) to send :
 
 --------------------------
 ### vim VS Code 
-Normal Mode
+VIM_NORMAL_SPACE_MODE
 ```
-Normal Mode (Index Layer off)
+;fn row
+1: return
+2:
+-> go to the first line of the document(gg)
+-> jump to the first non-blank character of the line(^) 
+3: delete the character under the cursor and place you in insert mode(s)
+4:
+-> ("G") go to the last line of the document
+-> ("$") jump to the end of the line
+5: return 
 
-|       |        |   TAB  |   ENT  |    X   |        |
-|       |    Q   |    H   |    T   |    I   |    P   |
-|       |    S   |    E   |  Index [[   A  ]]    W   |
-|       |    N   |    L   |   BS   |    D   |    K   |
-|       |        |        |                          |
+; Top row remapping
 
+q:
+-> (">>") indent (move right) line one shiftwidth
+-> ("<<") indent (move left) line one shiftwidth
+w: DeleteLabel()
+e: YankLabel()
+r: ChangeLabel()
+t: ("p") put (paste) the clipboard after cursor
+
+; home row
+a: ("h") move cursor left
+s: ("k") move cursor up
+f: ("l") move cursor right
+d: ("j") move cursor down
+g:
+(g = "00") go to block_visual in Vim_VisualLabel()
+(g = "0") go to char_visual in Vim_VisualLabel()
+(g = "1") go to line_visual in Vim_VisualLabel()
+
+; Bottom row remapping
+z: ("b") jump backwards to the start of a word
+x: WheelUp
+c: WheelDown
+v: ("w") jump forwards to the start of a word
+b:
+(keyPress = "00") ("^r") short keyPress to redo
+(keyPress = "0") ("u") short keyPress to undo
+
+Space:
+(keyPress = "00") ("o") double short keyPress to go next line and enter insert mode
+(keyPress = "1") ("i") short keyPress to go to the prev char where the curser point and enter insert mode
+(keyPress = "0") ("a") long keyPress to go to the next char where the curser point and enter insert mode
+----------- 
+ 
 q: indent (move right) line one shiftwidth.(>>)
 h: Move left.
 t: Move right.
