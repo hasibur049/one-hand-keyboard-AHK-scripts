@@ -11,7 +11,7 @@ This is my personal keyboard layout. It is designed for use with only the left h
 ```
 Index Layer I
 
-|       |Capslock|   TAB  |   ENT  |    X   |        |
+|       |CapsLock|   TAB  |   ENT  |    X   |        |
 |       |    Q   |    H   |    T   |    I   |    P   |
 |       |    S   |    E   |  Index [[   A  ]]    W   |
 |       |    N   |    L   |   BS   |    D   |    K   |
@@ -19,7 +19,7 @@ Index Layer I
 
 Index Layer II
 
-|       |Capslock|   Tab  |        |    x   |        |
+|       |CapsLock|   Tab  |        |    x   |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
 |       |    U   |    O   |        [[   R  ]]    C   |
 |       |    M   |    Y   |    V   |    F   |    P   |
