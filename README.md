@@ -91,8 +91,7 @@ VIM_NORMAL_SPACE_MODE
 -> ("$") jump to the end of the line
 5: return 
 
-; Top row remapping
-
+; Top row 
 q:
 -> (">>") indent (move right) line one shiftwidth
 -> ("<<") indent (move left) line one shiftwidth
@@ -111,7 +110,7 @@ g:
 (g = "0") go to char_visual in Vim_VisualLabel()
 (g = "1") go to line_visual in Vim_VisualLabel()
 
-; Bottom row remapping
+; Bottom row 
 z: ("b") jump backwards to the start of a word
 x: WheelUp
 c: WheelDown
