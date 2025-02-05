@@ -159,15 +159,6 @@ d{motion}: "Delete" command. Deletes the text defined by the motion.
     diw: Delete the entire word under the cursor.
     dd: Delete the entire current line.
 k: jump to the end of the line. {$}
-```
-```
-Normal Mode (Index Layer on)
-
-|       |        |        |   BS   |        |        |
-|       |    Z   |    B   |   ENT  |    G   |    J   |
-|       |    U   |    O   |        [[   R  ]]    C   |
-|       |    M   |    Y   |    V   |    F   |    P   |
-|       |        |        |                          |
 
 b - redo. { Ctrl + r}
 u – undo.
