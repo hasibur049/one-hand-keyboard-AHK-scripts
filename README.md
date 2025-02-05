@@ -25,7 +25,20 @@ Index Layer II
 |       |    M   |    Y   |    V   |    F   |    P   |
 |       |        |        |                          |
 ```
-
+ Hotkeys for d & other N key combinations
+```
+d & s:: Send "{Up}"
+d & f:: Send "{Down}"
+d & g::AltTab
+d & x:: Send "{Left}"
+d & v:: Send "{Right}"
+d & t:: Send "{Delete}"
+d & w:: Send "{Home} {Up} {End} {Enter}"
+d & r:: Send "{End} {Enter}"
+d & Space:
+       -> ToolTip("Long Press !")
+       -> Gui1Setup()  ; Call the function directly
+```
 --------------------
 ### Space with N key
 - Press any key While `Space` key down and `index` layer I.
