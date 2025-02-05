@@ -137,7 +137,8 @@ Space:
 (keyPress = "1") ("i") short keyPress to go to the prev char where the curser point and enter insert mode
 (keyPress = "0") ("a") long keyPress to go to the next char where the curser point and enter insert mode
 ----------- 
- 
+Extra reference
+
 q: indent (move right) line one shiftwidth.(>>)
 h: Move left.
 t: Move right.
@@ -245,6 +246,8 @@ Space:
 (g = "0") "i" short click to go to the prev char where the curser point and enter insert mode
 
 -------------
+Extra reference
+
 q: 
 h: Move left.
 t: Move right.
