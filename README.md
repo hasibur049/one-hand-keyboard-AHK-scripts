@@ -29,7 +29,7 @@ Index Layer II
 ```
 d & s:: Send "{Up}"
 d & f:: Send "{Down}"
-d & g::AltTab
+d & g:: AltTab
 d & x:: Send "{Left}"
 d & v:: Send "{Right}"
 d & t:: Send "{Delete}"
