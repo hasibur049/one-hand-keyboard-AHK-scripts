@@ -39,6 +39,24 @@ d & Space:
        -> ToolTip("Long Press !")
        -> Gui1Setup()  ; Call the function directly
 ```
+Other Modifier keys 
+```
+LCtrl & a::
+{
+    if WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe")
+        Send("^s")
+    else
+        Send("^x")
+}
+
+LCtrl & s:: Send("^z")  ; Send Ctrl+Z when either Ctrl+S is pressed
+LCtrl & z:: Send("^c")  ; Send Ctrl+C when either Ctrl+Z is pressed
+LCtrl & x:: Send("^v")  ; Send Ctrl+V when either Ctrl+X is pressed
+
+LWin::Alt
+LCtrl & Space:: Suspend ; Hotkey to suspend the script
+LCtrl & Alt:: Reload	; Hotkey to reload the script
+```
 --------------------
 ### Space with N key
 - Press any key While `Space` key down and `index` layer I.
