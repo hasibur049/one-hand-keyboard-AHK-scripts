@@ -1,6 +1,6 @@
 # one-hand-keyboard-AHK-scripts
 
-This is my personal keyboard layout. It is designed for use with only the left hand. People who have use of only their left hand can benefit from using this software.
+This is my one-hand keyboard layout. It's designed for left hand people. People who have only left hand can be benefit from using this software.
 
 ---------------
 ### Index Layer
@@ -19,7 +19,7 @@ Index Layer I
 
 Index Layer II
 
-|       |CapsLock|   TAB  |        |    X   |        |
+|       |CapsLock|   TAB  |   BS   |    X   |        |
 |       |    Z   |    B   |   ENT  |    G   |    J   |
 |       |    U   |    O   |        [[   R  ]]    C   |
 |       |    M   |    Y   |    V   |    F   |    P   |
